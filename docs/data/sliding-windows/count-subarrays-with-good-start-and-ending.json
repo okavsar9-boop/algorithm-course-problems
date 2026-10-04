@@ -1,0 +1,29 @@
+{
+  "num": "14.21",
+  "title": "Count Subarrays With Good Start and Ending",
+  "slug": "count-subarrays-with-good-start-and-ending",
+  "description": {
+    "intro": "Given an array, sales, where sales[i] is the number of sales on day i, return the number of subarrays that start and end on a good day.\n\nA good day is a day with at least 10 sales.",
+    "examples": [
+      "Example 1: sales = [0, 20, 5, 15, 10]\nOutput: 6\nThe good days are at indices 1, 3, and 4\nThe valid subarrays are:\n- [20]\n- [15]\n- [10]\n- [20, 5, 15]\n- [15, 10]\n- [20, 5, 15, 10]",
+      "Example 2: sales = [0, 5, 8]\nOutput: 0\nThere are no good days.",
+      "Example 3: sales = [10, 20, 30]\nOutput: 6\nAll days are good, so all subarrays count."
+    ],
+    "constraints": [
+      "0 <= sales.length <= 10^5",
+      "0 <= sales[i] < 10^3"
+    ],
+    "approach": "Recall that an array of length n has n * (n + 1) / 2 subarrays.\n\nFor this particular problem, the key property to leverage is that each distinct pair of good days in sales contributes 1 to the final count. Thus, the answer is g * (g + 1) / 2, where g is the number of good days in sales."
+  },
+  "complexity": "Time & Space Analysis\nn: the length of the sales array\n\nTime: O(n) - we make a single pass through the sales array to count the number of good days, then use a formula to compute the answer\n\nExtra space: O(1)",
+  "solutions": {
+    "python": "def count_subarrays_with_good_start_and_ending(sales):\n  n = len(sales)\n  good_days = sum(1 for x in sales if x >= 10)\n  return good_days * (good_days + 1) // 2",
+    "javascript": "function countSubarraysWithGoodStartAndEnding(sales) {\n  const goodDays = sales.filter((x) => x >= 10).length;\n  return (goodDays * (goodDays + 1)) / 2;\n}",
+    "java": "class CountSubarraysWithGoodStartAndEnding {\n  public long solve(int[] sales) {\n    int goodDays = 0;\n    for (int x : sales) {\n      if (x >= 10) {\n        goodDays++;\n      }\n    }\n    return (long) goodDays * (goodDays + 1) / 2;\n  }\n}"
+  },
+  "tests": {
+    "python": "def run_tests():\n  tests = [\n      # Example with mix of good and bad days\n      ([0, 20, 5, 15, 10], 6),\n      # Edge case - empty array\n      ([], 0),\n      # Edge case - all good days\n      ([10, 20, 30], 6),\n      # Edge case - all bad days\n      ([0, 5, 8], 0),\n      # Edge case - single good day\n      ([10], 1),\n  ]\n  for sales, want in tests:\n    got = count_subarrays_with_good_start_and_ending(sales)\n    assert got == want, f\"\\ncount_subarrays_with_good_start_and_ending({sales}): got: {        got}, want: {want}\\n\"\n\nrun_tests()",
+    "javascript": "function runTests() {\n  const tests = [\n    // Example with mix of good and bad days\n    [[0, 20, 5, 15, 10], 6],\n    // Edge case - empty array\n    [[], 0],\n    // Edge case - all good days\n    [[10, 20, 30], 6],\n    // Edge case - all bad days\n    [[0, 5, 8], 0],\n    // Edge case - single good day\n    [[10], 1],\n  ];\n  for (const [sales, want] of tests) {\n    const got = countSubarraysWithGoodStartAndEnding(sales);\n    if (got !== want) {\n      throw new Error(\n        `\\ncountSubarraysWithGoodStartAndEnding(${JSON.stringify(\n          sales,\n        )}): got: ${got}, want: ${want}\\n`,\n      );\n    }\n  }\n}\n\nrunTests();",
+    "java": "class RunTests {\n  public void runTests() {\n    Object[][] tests = {\n        // Example with mix of good and bad days\n        { new int[] { 0, 20, 5, 15, 10 }, 6L },\n        // Edge case - empty array\n        { new int[] {}, 0L },\n        // Edge case - all good days\n        { new int[] { 10, 20, 30 }, 6L },\n        // Edge case - all bad days\n        { new int[] { 0, 5, 8 }, 0L },\n        // Edge case - single good day\n        { new int[] { 10 }, 1L },\n    };\n\n    CountSubarraysWithGoodStartAndEnding solution = new CountSubarraysWithGoodStartAndEnding();\n    for (Object[] test : tests) {\n      int[] sales = (int[]) test[0];\n      long want = (long) test[1];\n      long got = solution.solve(sales);\n      if (got != want) {\n        throw new RuntimeException(String.format(\n            \"\\nsolve(%s): got: %d, want: %d\\n\",\n            Arrays.toString(sales), got, want));\n      }\n    }\n  }\n}\n\npublic class Solution {\n  public static void main(String[] args) {\n    new RunTests().runTests();\n  }\n}"
+  }
+}

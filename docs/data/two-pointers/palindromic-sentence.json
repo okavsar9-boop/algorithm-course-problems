@@ -1,0 +1,28 @@
+{
+  "num": "3.4",
+  "title": "Palindromic Sentence",
+  "slug": "palindromic-sentence",
+  "description": {
+    "intro": "Given a string s, return whether its letters form a palindrome ignoring punctuation, spaces, and casing.",
+    "examples": [
+      "Example 1:\nInput: s = \"Bob wondered, 'Now, Bob?'\"\nOutput: true\nExplanation: Considering only letters and ignoring case, we get\n\"bobwonderednowbob\" which is a palindrome.",
+      "Example 2:\nInput: s = \"race a car\"\nOutput: false\nExplanation: Considering only letters and ignoring case, we get \"raceacar\"\nwhich is not a palindrome."
+    ],
+    "constraints": [
+      "0 \u2264 s.length \u2264 10^6",
+      "s consists of printable ASCII characters"
+    ],
+    "approach": "We can use the 'inward pointers' movement pattern, as usual for palindrome problems.\n\nWe compare characters starting from both ends of the string with two pointers, l and r, while skipping over non-letter characters.\n\nAt each iteration, we make progress towards the meeting point of the two pointers. We consider the following cases:\n\nIf the left character is not a letter, skip it\nIf the right character is not a letter, skip it\nIf both are letters, compare them (ignoring case)\nIf they don't match, return False\nIf they match, move both pointers inward\nThe string is palindromic if we never find a mismatch between letters."
+  },
+  "complexity": "Time & Space Analysis\nn: the length of the string\n\nTime: O(n) - at each iteration, we make progress towards the meeting point of the two pointers. after at most n iterations, the two pointers will meet\n\nExtra space: O(1) - only using constant extra space for the two pointers",
+  "solutions": {
+    "python": "def palindromic_sentence(s):\n  l, r = 0, len(s) - 1\n  while l < r:\n    if not s[l].isalpha():\n      l += 1\n    elif not s[r].isalpha():\n      r -= 1\n    else:\n      if s[l].lower() != s[r].lower():\n        return False\n      l += 1\n      r -= 1\n  return True",
+    "javascript": "function palindromicSentence(s) {\n  let l = 0,\n  r = s.length - 1;\n  while (l < r) {\n    if (!/[a-zA-Z]/.test(s[l])) {\n      l++;\n    } else if (!/[a-zA-Z]/.test(s[r])) {\n      r--;\n    } else {\n      if (s[l].toLowerCase() !== s[r].toLowerCase()) {\n        return false;\n      }\n      l++;\n      r--;\n    }\n  }\n  return true;\n}",
+    "java": "class PalindromicSentence {\n  public boolean solve(String s) {\n    int l = 0, r = s.length() - 1;\n    while (l < r) {\n      if (!Character.isLetter(s.charAt(l))) {\n        l++;\n      } else if (!Character.isLetter(s.charAt(r))) {\n        r--;\n      } else {\n        if (Character.toLowerCase(s.charAt(l)) != Character\n        .toLowerCase(s.charAt(r))) {\n          return false;\n        }\n        l++;\n        r--;\n      }\n    }\n    return true;\n  }\n}"
+  },
+  "tests": {
+    "python": "def run_tests():\n  tests = [\n    # Example from the book\n    (\"Bob wondered, 'Now, Bob?'\", True),\n    # Additional test cases\n    (\"\", True),\n    (\"a\", True),\n    (\"A man, a plan, a canal: Panama\", True),\n    (\"race a car\", False),\n    (\"Was it a car or a cat I saw?\", True),\n    (\"hello\", False),\n    (\".,?!'\", True),\n    ]\n  for s, want in tests:\n    got = palindromic_sentence(s)\n    assert got == want, f\"\\npalindromic_sentence({s}): got: {got}, want: {want}\\n\"\n\nrun_tests()",
+    "javascript": "function runTests() {\n  const tests = [\n  // Example from the book\n  [\"Bob wondered, 'Now, Bob?'\", true],\n  // Additional test cases\n  [\"\", true],\n  [\"a\", true],\n  [\"A man, a plan, a canal: Panama\", true],\n  [\"race a car\", false],\n  [\"Was it a car or a cat I saw?\", true],\n  [\"hello\", false],\n  [\".,?!'\", true],\n  ];\n  for (const [s, want] of tests) {\n    const got = palindromicSentence(s);\n    if (got !== want) {\n      throw new Error(\n      `\\npalindromicSentence(${s}): got: ${got}, want: ${want}\\n`,\n      );\n    }\n  }\n}\n\nrunTests();",
+    "java": "class RunTests {\n  public void runTests() {\n    Object[][] tests = {\n      // Example from the book\n      { \"Bob wondered, 'Now, Bob?'\", true },\n      // Additional test cases\n      { \"\", true },\n      { \"a\", true },\n      { \"A man, a plan, a canal: Panama\", true },\n      { \"race a car\", false },\n      { \"Was it a car or a cat I saw?\", true },\n      { \"hello\", false },\n      { \".,?!'\", true },\n    };\n\n    PalindromicSentence solution = new PalindromicSentence();\n    for (Object[] test : tests) {\n      String s = (String) test[0];\n      boolean want = (boolean) test[1];\n      boolean got = solution.solve(s);\n      if (got != want) {\n        throw new RuntimeException(String.format(\n        \"\\nsolve(%s): got: %b, want: %b\\n\",\n        s, got, want));\n      }\n    }\n\n  }\n}\n\npublic class Solution {\n  public static void main(String[] args) {\n    new RunTests().runTests();\n  }\n}"
+  }
+}

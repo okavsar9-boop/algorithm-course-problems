@@ -1,0 +1,28 @@
+{
+  "num": "16.6",
+  "title": "Minimum Steps to One",
+  "slug": "minimum-steps-to-one",
+  "description": {
+    "intro": "Write a function that accepts a positive integer, n, and returns the minimum number of operations to get to 1, assuming we can choose between the following operations:\n\nSubtract 1.\nDivide by 2. We can only do this if the number is divisible by 2.\nDivide by 3. We can only do this if the number is divisible by 3.",
+    "examples": [
+      "Example 1:\nn = 10\nOutput: 3. We can do 10 -> 9 -> 3 -> 1.",
+      "Example 2:\nn = 1\nOutput: 0",
+      "Example 3:\nn = 15\nOutput: 4"
+    ],
+    "constraints": [
+      "n is at least 1 and at most 10^6."
+    ],
+    "approach": "We may ask: \"Can we solve this problem with a greedy algorithm?\" It seems intuitive that we should always pick whichever operation gets us closer to 1. So, if n is 9, we would divide by 3, not subtract 1.\n\nThis is what is known as a greedy algorithm. However, it does not work for every input. Can you find one where it doesn't work?\n\nFor instance, if n = 10, it is a mistake to divide by 2. This results in 4 steps: 10 -> 5 -> 4 -> 2 -> 1. A better solution is 10 -> 9 -> 3 -> 1. We say that 10 is a counterexample for this greedy algorithm. Since Greedy doesn't work, let's tackle it with DP.\n\nLet's think about a recurrence relation. We'll have one subproblem, num_steps(i), for each number from n to 1. Each subproblem denotes the minimum number of steps to get to 1 starting from i. At each step, we have up to 3 choices, which we aggregate with min() because it's a minimization problem. Our base case is i == 1, and our original case is num_steps(n).\n\nWe can use the memoization recipe to turn the recurrence relation into efficient code:\n\nmemo = empty map\n\nf(subproblem_id):\n  if subproblem is base case:\n    return result directly\n  if subproblem in memo map:\n    return cached result\n\nmemo[subproblem_id] = recurrence relation formula\n  return memo[subproblem_id]\n\nreturn f(initial subproblem)"
+  },
+  "complexity": "Time & Space Analysis\nn: the input number\nFor DP, we can analyze the time complexity as the product of two things: the number of subproblems and the non-recursive work per subproblem (when the subproblem is not cached).\n\nFor this problem, we have:\n\nSubproblems: n.\nNon-recursive work: O(1) for each subproblem.\nTime: O(n).\nExtra space: O(n) - for the memoization map.",
+  "solutions": {
+    "python": "def minimum_steps_to_one(n):\n  memo = {}\n\n  def num_steps(i):\n    if i == 1:\n      return 0\n    if i in memo:\n      return memo[i]\n    steps = num_steps(i - 1)\n    if i % 2 == 0:\n      steps = min(steps, num_steps(i // 2))\n    if i % 3 == 0:\n      steps = min(steps, num_steps(i // 3))\n    memo[i] = 1 + steps\n    return memo[i]\n\n  return num_steps(n)",
+    "javascript": "function minimumStepsToOne(n) {\n  const memo = new Map();\n\n  function numSteps(i) {\n    if (i === 1) {\n      return 0;\n    }\n    if (memo.has(i)) {\n      return memo.get(i);\n    }\n    let steps = numSteps(i - 1);\n    if (i % 2 === 0) {\n      steps = Math.min(steps, numSteps(i / 2));\n    }\n    if (i % 3 === 0) {\n      steps = Math.min(steps, numSteps(i / 3));\n    }\n    memo.set(i, 1 + steps);\n    return memo.get(i);\n  }\n\n  return numSteps(n);\n}",
+    "java": "class MinimumStepsToOne {\n  private Map<Integer, Integer> memo;\n\n  public int solve(int n) {\n    memo = new HashMap<>();\n    return numSteps(n);\n  }\n\n  private int numSteps(int i) {\n    if (i == 1) {\n      return 0;\n    }\n    if (memo.containsKey(i)) {\n      return memo.get(i);\n    }\n    int steps = numSteps(i - 1);\n    if (i % 2 == 0) {\n      steps = Math.min(steps, numSteps(i / 2));\n    }\n    if (i % 3 == 0) {\n      steps = Math.min(steps, numSteps(i / 3));\n    }\n    memo.put(i, 1 + steps);\n    return memo.get(i);\n  }\n}"
+  },
+  "tests": {
+    "python": "def run_tests():\n  tests = [\n      (10, 3),\n      (1, 0),\n      (15, 4),\n      (6, 2),\n      (7, 3),\n      (100, 7),  # larger test case\n  ]\n  for n, want in tests:\n    got = minimum_steps_to_one(n)\n    assert got == want, f\"\\nminimum_steps_to_one({n}): got: {        got}, want: {want}\\n\"\n\nrun_tests()",
+    "javascript": "function runTests() {\n  const tests = [\n    [10, 3],\n    [1, 0],\n    [15, 4],\n    [6, 2],\n    [7, 3],\n    [100, 7], // larger test case\n  ];\n  for (const [n, want] of tests) {\n    const got = minimumStepsToOne(n);\n    if (got !== want) {\n      throw new Error(\n        `\\nminimumStepsToOne(${n}): got: ${got}, want: ${want}\\n`,\n      );\n    }\n  }\n}\n\nrunTests();",
+    "java": "class RunTests {\n  public void runTests() {\n    Object[][] tests = {\n        { 10, 3 },\n        { 1, 0 },\n        { 15, 4 },\n        { 6, 2 },\n        { 7, 3 },\n        { 100, 7 }, // larger test case\n    };\n\n    MinimumStepsToOne solution = new MinimumStepsToOne();\n    for (Object[] test : tests) {\n      int n = (int) test[0];\n      int want = (int) test[1];\n      int got = solution.solve(n);\n      if (got != want) {\n        throw new RuntimeException(String.format(\n            \"\\nsolve(%d): got: %d, want: %d\\n\", n, got, want));\n      }\n    }\n  }\n}\n\npublic class Solution {\n  public static void main(String[] args) {\n    new RunTests().runTests();\n  }\n}"
+  }
+}

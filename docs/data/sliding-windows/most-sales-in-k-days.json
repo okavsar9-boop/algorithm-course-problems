@@ -1,0 +1,30 @@
+{
+  "num": "14.2",
+  "title": "Most Sales in K Days",
+  "slug": "most-sales-in-k-days",
+  "description": {
+    "intro": "Recipe 1 - Fixed-length Window\n\ndef fixed_length_window(arr, k):\n  initialize:\n  - l and r to 0 (empty window)\n  - data structures to track window info\n  - cur_best to 0\n  while we can grow the window (r < len(arr))\n    grow the window (update data structures and increase r)\n    if the window has the correct length (r - l == k)\n      update cur_best if needed\n      shrink the window (update data structures and increase l)\n  return cur_best\n  Given the array sales and a number k with 1 \u2264 k \u2264 len(sales), find the most sales in any k-day period.\n\nReturn the first day of that period (days start at 0). If there are multiple k-day periods with the most sales, return the first day of the first one.",
+    "examples": [
+      "Example 1: sales = [8, 1, 3, 7], k = 2\nOutput: 2\nThe subarray of length 2 with maximum sum is [3, 7], which starts at index 2.",
+      "Example 2: sales = [5, 10, 15, 5], k = 1\nOutput: 2\nThe day with most sales is day 2 with 15 sales.",
+      "Example 3: sales = [1, 2, 3], k = 3\nOutput: 0\nThe only valid period is the entire array."
+    ],
+    "constraints": [
+      "The length of sales is at most 10^6",
+      "Each element in sales is a non-negative integer less than 10^3",
+      "1 \u2264 k \u2264 len(sales)"
+    ],
+    "approach": "This is a fixed-length window problem, so we can use the fixed-length window recipe:\n\nfixed_length_window(arr, k):\n  initialize:\n    - l and r to 0 (empty window)\n    - data structures to track window info\n    - cur_best to 0\n  while we can grow the window (r < len(arr))\n    grow the window (update data structures and increase r)\n    if the window has the correct length (r - l == k)\n      update cur_best if needed\n      shrink the window (update data structures and increase l)\n  return cur_best\nWe broke a similar problem in more detail here: Most Weekly Sales."
+  },
+  "complexity": "Time & Space Analysis\nn: the length of the sales array\n\nk: the length of the window\n\nTime: O(n) - we make a single pass through the sales array.\n\nExtra space: O(1)",
+  "solutions": {
+    "python": "def most_sales_in_k_days(sales, k):\n  l, r = 0, 0\n  window_sum = 0\n  cur_max = 0\n  best_start = 0\n  while r < len(sales):\n    window_sum += sales[r]\n    r += 1\n    if r - l == k:\n      if window_sum > cur_max:\n        cur_max = window_sum\n        best_start = l\n      window_sum -= sales[l]\n      l += 1\n  return best_start",
+    "javascript": "function mostSalesInKDays(sales, k) {\n  let l = 0,\n    r = 0;\n  let windowSum = 0;\n  let curMax = 0;\n  let bestStart = 0;\n  while (r < sales.length) {\n    windowSum += sales[r];\n    r++;\n    if (r - l === k) {\n      if (windowSum > curMax) {\n        curMax = windowSum;\n        bestStart = l;\n      }\n      windowSum -= sales[l];\n      l++;\n    }\n  }\n  return bestStart;\n}",
+    "java": "class MostSalesInKDays {\n  public int solve(int[] sales, int k) {\n    int l = 0, r = 0;\n    int windowSum = 0;\n    int curMax = 0;\n    int bestStart = 0;\n    while (r < sales.length) {\n      windowSum += sales[r];\n      r++;\n      if (r - l == k) {\n        if (windowSum > curMax) {\n          curMax = windowSum;\n          bestStart = l;\n        }\n        windowSum -= sales[l];\n        l++;\n      }\n    }\n    return bestStart;\n  }\n}"
+  },
+  "tests": {
+    "python": "def run_tests():\n  tests = [\n      # Example from the book\n      ([8, 1, 3, 7], 2, 2),\n      # Edge case - k=1\n      ([5, 10, 15, 5], 1, 2),\n      # Edge case - k=len(sales)\n      ([1, 2, 3], 3, 0),\n      # Edge case - multiple valid answers, return first\n      ([10, 5, 10], 2, 0),\n  ]\n  for sales, k, want in tests:\n    got = most_sales_in_k_days(sales, k)\n    assert got == want, f\"\\nmost_sales_in_k_days({sales}, {k}): got: {        got}, want {want}\\n\"\n\nrun_tests()",
+    "javascript": "function runTests() {\n  const tests = [\n    // Example from the book\n    [[8, 1, 3, 7], 2, 2],\n    // Edge case - k=1\n    [[5, 10, 15, 5], 1, 2],\n    // Edge case - k=len(sales)\n    [[1, 2, 3], 3, 0],\n    // Edge case - multiple valid answers, return first\n    [[10, 5, 10], 2, 0],\n  ];\n  for (const [sales, k, want] of tests) {\n    const got = mostSalesInKDays(sales, k);\n    if (got !== want) {\n      throw new Error(\n        `\\nmostSalesInKDays(${JSON.stringify(sales)}, ${k}): got: ${got}, want ${want}\\n`,\n      );\n    }\n  }\n}\n\nrunTests();",
+    "java": "class RunTests {\n  public void runTests() {\n    Object[][] tests = {\n        // Example from the book\n        { new int[] { 8, 1, 3, 7 }, 2, 2 },\n        // Edge case - k=1\n        { new int[] { 5, 10, 15, 5 }, 1, 2 },\n        // Edge case - k=len(sales)\n        { new int[] { 1, 2, 3 }, 3, 0 },\n        // Edge case - multiple valid answers, return first\n        { new int[] { 10, 5, 10 }, 2, 0 },\n    };\n\n    MostSalesInKDays solution = new MostSalesInKDays();\n    for (Object[] test : tests) {\n      int[] sales = (int[]) test[0];\n      int k = (int) test[1];\n      int want = (int) test[2];\n      int got = solution.solve(sales, k);\n      if (got != want) {\n        throw new RuntimeException(String.format(\n            \"\\nsolve(%s, %d): got: %d, want: %d\\n\",\n            Arrays.toString(sales), k, got, want));\n      }\n    }\n  }\n}\n\npublic class Solution {\n  public static void main(String[] args) {\n    new RunTests().runTests();\n  }\n}"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "num": "8.1",
+  "title": "Compress Array",
+  "slug": "compress-array",
+  "description": {
+    "intro": "Given an array of integers, arr, a compress operation finds the first pair of consecutive equal numbers and combines them into their sum. If there are no consecutive equal numbers, the array is considered fully compressed. Your goal is to repeatedly compress the array until it is fully compressed.\n\nHere is an example of a compress operation:\n![alt text](image.png)",
+    "examples": [
+      "Example 1: arr = [8, 4, 2, 2, 2, 4]\nOutput: [16, 2, 4].\nThe steps are [8, 4, 2, 2, 2, 4] -> [8, 4, 4, 2, 4] -> [8, 8, 2, 4] -> [16, 2,\n4]",
+      "Example 2: arr = [4, 4, 4, 4]\nOutput: [16]\nThe steps are [4, 4, 4, 4] -> [8, 4, 4] -> [8, 8] -> [16]",
+      "Example 3: arr = [1, 2, 3, 4]\nOutput: [1, 2, 3, 4]"
+    ],
+    "constraints": [
+      "The length of arr is at most 10^5",
+      "Each element in arr is a non-negative integer less than 10^3"
+    ],
+    "approach": "The compression order is important -- if we merge pairs that are not the leftmost pair, we may end up with an incorrect result. For instance, in Example 1, we could have ended with [8, 4, 2, 8] instead of [16, 2, 4].\n\nWe can use a stack to add the array elements from left to right. Whenever we add a number, we see if it triggers any combinations. It could trigger a chain of combinations, which we handle with a nested loop:"
+  },
+  "complexity": "Time & Space Analysis\nn: the length of the array\n\nTime: O(n) - each element is pushed onto the stack at most once and popped at most once during compression operations. The nested loop for chaining compressions doesn't change the amortized complexity.\n\nExtra space: O(n) - in the worst case (no compressions possible), the stack contains all input elements.",
+  "solutions": {
+    "python": "def compress_array(arr):\n  stack = []\n  for num in arr:\n    while stack and stack[-1] == num:\n      num += stack.pop()\n    stack.append(num)\n  return stack",
+    "javascript": "function compressArray(arr) {\n  const stack = [];\n  for (let num of arr) {\n    while (stack.length && stack[stack.length - 1] === num) {\n      num += stack.pop();\n    }\n    stack.push(num);\n  }\n  return stack;\n}",
+    "java": "class CompressArray {\n  public List<Integer> solve(int[] arr) {\n    List<Integer> stack = new ArrayList<>();\n    for (int num : arr) {\n      while (!stack.isEmpty() && stack.get(stack.size() - 1) == num) {\n        num += stack.remove(stack.size() - 1);\n      }\n      stack.add(num);\n    }\n    return stack;\n  }\n}"
+  },
+  "tests": {
+    "python": "def run_tests():\n  tests = [\n    # Examples from problem description\n    ([8, 4, 2, 2, 2, 4], [16, 2, 4]),\n    ([4, 4, 4, 4], [16]),\n    ([1, 2, 3, 4], [1, 2, 3, 4]),\n\n    # Edge cases\n    ([], []),\n    ([1], [1]),\n    ([0, 0], [0]),\n    ([0, 0, 0, 0], [0]),\n\n    # Multiple compression chains\n    ([1, 1, 2, 2, 3, 3], [4, 2, 6]),\n    ([2, 2, 2, 2, 2, 2], [8, 4]),\n\n    # Alternating numbers\n    ([1, 2, 1, 2, 1, 2], [1, 2, 1, 2, 1, 2]),\n\n    # Numbers that sum to equal another number\n    ([2, 2, 4], [8]),\n    ([3, 3, 6, 6], [12, 6]),\n\n    # Large numbers within constraints\n    ([999, 999], [1998]),\n    ([500, 500, 500, 500], [2000]),\n\n    # Mix of different scenarios\n    ([5, 5, 5, 1, 1, 5], [10, 5, 2, 5]),\n  ]\n  for arr, want in tests:\n    got = compress_array(arr)\n    assert got == want, f\"\\ncompress_array({arr}): got: {got}, want: {want}\\n\"\n\nrun_tests()",
+    "javascript": "function runTests() {\n  const tests = [\n    [\n      [8, 4, 2, 2, 2, 4],\n      [16, 2, 4],\n    ],\n    [[4, 4, 4, 4], [16]],\n    [\n      [1, 2, 3, 4],\n      [1, 2, 3, 4],\n    ],\n    [[], []],\n    [[0, 0, 0, 0], [0]],\n  ];\n  for (const [arr, want] of tests) {\n    const got = compressArray(arr);\n    if (JSON.stringify(got) !== JSON.stringify(want)) {\n      throw new Error(\n        `\\ncompressArray(${JSON.stringify(arr)}): got: ${JSON.stringify(got)}, want: ${JSON.stringify(want)}\\n`,\n      );\n    }\n  }\n}\n\nrunTests();",
+    "java": "class RunTests {\n  private static class TestCase {\n    final int[] input;\n    final List<Integer> want;\n\n    TestCase(int[] input, List<Integer> want) {\n      this.input = input;\n      this.want = want;\n    }\n  }\n\n  public void runTests() {\n    TestCase[] tests = {\n        new TestCase(new int[] { 8, 4, 2, 2, 2, 4 }, List.of(16, 2, 4)),\n        new TestCase(new int[] { 4, 4, 4, 4 }, List.of(16)),\n        new TestCase(new int[] { 1, 2, 3, 4 }, List.of(1, 2, 3, 4)),\n        new TestCase(new int[] {}, List.of()),\n        new TestCase(new int[] { 0, 0, 0, 0 }, List.of(0)),\n    };\n\n    CompressArray solution = new CompressArray();\n    for (TestCase test : tests) {\n      List<Integer> got = solution.solve(test.input);\n      if (!got.equals(test.want)) {\n        throw new RuntimeException(String.format(\n            \"\\nsolve(%s): got: %s, want: %s\\n\",\n            java.util.Arrays.toString(test.input), got, test.want));\n      }\n    }\n  }\n}\n\npublic class Solution {\n  public static void main(String[] args) {\n    new RunTests().runTests();\n  }\n}"
+  }
+}

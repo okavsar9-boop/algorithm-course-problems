@@ -1,0 +1,29 @@
+{
+  "num": "3.12",
+  "title": "Array Reversal",
+  "slug": "array-reversal",
+  "description": {
+    "intro": "Reverse an array of letters, arr, in place using O(1) extra space.",
+    "examples": [
+      "Example 1:\nInput: arr = ['h', 'e', 'l', 'l', 'o']\nOutput: ['o', 'l', 'l', 'e', 'h']",
+      "Example 2:\nInput: arr = ['a']\nOutput: ['a']",
+      "Example 3:\nInput: arr = []\nOutput: []"
+    ],
+    "constraints": [
+      "0 \u2264 arr.length \u2264 10^5",
+      "arr contains only letters"
+    ],
+    "approach": "If we were reversing arr into a new array, we could use a simple backward loop. However, when doing things in place, we need to worry about writing over elements that we still need to move -- we cannot simply write the first element to the final position because the element at the final position would get 'erased'.\n\nInstead, we can use the inward pointers movement pattern. We start by swapping the first and final elements, then move the pointers inward.\n\nWe stop when the two pointers meet. If we kept going, we'd end up reversing the array back to its original state. For odd-length arrays, the middle element doesn't need to be moved.\n\n![alt text](image-9.png)\n\nArray reversal solution 1"
+  },
+  "complexity": "Time & Space Analysis\nn: the length of the array\n\nTime: O(n) - we perform n/2 swaps, where each swap takes constant time\n\nExtra space: O(1) - the reversal is done in-place using only two pointers",
+  "solutions": {
+    "python": "def reverse(arr):\n  l, r = 0, len(arr) - 1\n  while l < r:\n    arr[l], arr[r] = arr[r], arr[l]\n    l += 1\n    r -= 1",
+    "javascript": "function reverse(arr) {\n  let l = 0,\n  r = arr.length - 1;\n  while (l < r) {\n    [arr[l], arr[r]] = [arr[r], arr[l]];\n    l++;\n    r--;\n  }\n}",
+    "java": "class Reverse {\n  public void solve(char[] arr) {\n    int l = 0, r = arr.length - 1;\n    while (l < r) {\n      char temp = arr[l];\n      arr[l] = arr[r];\n      arr[r] = temp;\n      l++;\n      r--;\n    }\n  }\n}"
+  },
+  "tests": {
+    "python": "def run_tests():\n  tests = [\n    # Test cases\n    (list(\"hello\"), list(\"olleh\")),\n    (list(\"\"), list(\"\")),\n    (list(\"a\"), list(\"a\")),\n    (list(\"ab\"), list(\"ba\")),\n    (list(\"abc\"), list(\"cba\")),\n    (list(\"abcd\"), list(\"dcba\")),\n    ]\n  for arr, want in tests:\n    arr_copy = arr.copy() # Make a copy since reverse modifies in place\n    reverse(arr_copy)\n    assert arr_copy == want, f\"\\nreverse({arr}): got: {arr_copy}, want: {want}\\n\"\n\nrun_tests()",
+    "javascript": "function runTests() {\n  const tests = [\n  // Test cases\n  [Array.from(\"hello\"), Array.from(\"olleh\")],\n  [Array.from(\"\"), Array.from(\"\")],\n  [Array.from(\"a\"), Array.from(\"a\")],\n  [Array.from(\"ab\"), Array.from(\"ba\")],\n  [Array.from(\"abc\"), Array.from(\"cba\")],\n  [Array.from(\"abcd\"), Array.from(\"dcba\")],\n  ];\n  for (const [arr, want] of tests) {\n    const arrCopy = [...arr]; // Make a copy since reverse modifies in place\n    reverse(arrCopy);\n    if (JSON.stringify(arrCopy) !== JSON.stringify(want)) {\n      throw new Error(\n      `\\nreverse(${JSON.stringify(arr)}): got: ${JSON.stringify(arrCopy)}, want: ${JSON.stringify(want)}\\n`,\n      );\n    }\n  }\n}\n\nrunTests();",
+    "java": "class RunTests {\n  public void runTests() {\n    Object[][] tests = {\n      // Test cases\n      { \"hello\".toCharArray(), \"olleh\".toCharArray() },\n      { \"\".toCharArray(), \"\".toCharArray() },\n      { \"a\".toCharArray(), \"a\".toCharArray() },\n      { \"ab\".toCharArray(), \"ba\".toCharArray() },\n      { \"abc\".toCharArray(), \"cba\".toCharArray() },\n      { \"abcd\".toCharArray(), \"dcba\".toCharArray() },\n    };\n\n    Reverse solution = new Reverse();\n    for (Object[] test : tests) {\n      char[] arr = Arrays.copyOf((char[]) test[0], ((char[]) test[0]).length);\n      char[] want = (char[]) test[1];\n      solution.solve(arr);\n      if (!Arrays.equals(arr, want)) {\n        throw new RuntimeException(String.format(\n        \"\\nsolve(%s): got: %s, want: %s\\n\",\n        Arrays.toString((char[]) test[0]), Arrays.toString(arr),\n        Arrays.toString(want)));\n      }\n    }\n\n  }\n}\n\npublic class Solution {\n  public static void main(String[] args) {\n    new RunTests().runTests();\n  }\n}"
+  }
+}

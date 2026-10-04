@@ -1,0 +1,32 @@
+{
+  "num": "9.3",
+  "title": "Powers Mod M",
+  "slug": "powers-mod-m",
+  "description": {
+    "intro": "Given three integers a > 1, p \u2265 0, and m > 1, compute a^p % m while avoiding storing intermediate values much larger than m.\n\nThe basic recurrence relation for powers is:\n\na^0 = 1\nFor p > 0, a^p = a * a^(p-1)\nWhen it comes to the modulo operation, we can apply it at each step without affecting the result:\n\na^0 % m = 1\nFor p > 0, a^p % m = (a * (a^(p-1) % m)) % m",
+    "examples": [
+      "Example 1: a = 2, p = 5, m = 100\nOutput: 32",
+      "Example 2: a = 2, p = 5, m = 30\nOutput: 2",
+      "Example 3: a = 123456789, p = 987654321, m = 1000000007\nOutput: 652541198",
+      "Example 4: a = 3, p = 1, m = 5\nOutput: 3",
+      "Example 5: a = 5, p = 3, m = 7\nOutput: 6"
+    ],
+    "constraints": [
+      "1 < a \u2264 10^9",
+      "0 \u2264 p \u2264 10^9",
+      "1 < m \u2264 10^9"
+    ],
+    "approach": "A naive solution would be to code up the recurrence relation in the statement. Since we go from p to p-1, it would take O(p) time to reach the base case.\n\nHowever, we can speed it up using an alternative but equivalent recurrence relation. The key property is that, if p is even, a^p = a^(p/2) * a^(p/2). For instance, 2^10 = 2^5 * 2^5 = 32 * 32 = 1024.\n\nThis property allows us to compute a^p in terms of a to a smaller exponent, but we can halve the exponent rather than decrease it one by one. We get the following recurrence relation:\n\na^0 = 1\nFor even p > 0, a^p = a^(p/2) * a^(p/2)\nFor odd p > 0, a^p = a * a^(p-1)\nWhen coding it, we apply the modulo at each step to avoid working with large numbers:"
+  },
+  "complexity": "Time & Space Analysis\np: the exponent value\n\nTime: O(log p) - the algorithm halves the exponent for even p, so it halves after at most 2 steps.\n\nExtra space: O(log p) - the recursion call stack depth is proportional to the number of times we can halve p.",
+  "solutions": {
+    "python": "def power(a, p, m):\n  if p == 0:\n    return 1\n  if p % 2 == 0:\n    half = power(a, p // 2, m)\n    return (half * half) % m\n  return (a * power(a, p - 1, m)) % m",
+    "javascript": "function power(a, p, m) {\n  if (p === 0) {\n    return 1;\n  }\n  if (p % 2 === 0) {\n    const half = power(a, Math.floor(p / 2), m);\n    return (half * half) % m;\n  }\n  return ((a % m) * power(a, p - 1, m)) % m;\n}",
+    "java": "class Power {\n  public int solve(int a, int p, int m) {\n    if (p == 0) {\n      return 1;\n    }\n    if (p % 2 == 0) {\n      long half = solve(a, p / 2, m);\n      return (int) ((half * half) % m);\n    }\n    return (int) (((long) a * solve(a, p - 1, m)) % m);\n  }\n}"
+  },
+  "tests": {
+    "python": "def run_tests():\n  tests = [\n    # Example 1 from book\n    ((2, 5, 100), 32),\n    # Example 2 from book\n    ((2, 5, 30), 2),\n    # Edge cases\n    ((2, 0, 10), 1),\n    ((3, 1, 5), 3),\n    ((5, 3, 7), 6),\n    # Large test case\n    ((123456789, 987654321, 1000000007), 652541198),\n  ]\n\n  for (a, p, m), want in tests:\n    got = power(a, p, m)\n    assert got == want, f\"\\npower({a}, {p}, {m}): got: {got}, want: {want}\\n\"\n\nrun_tests()",
+    "javascript": "function runTests() {\n  const tests = [\n    // Example 1 from book\n    [[2, 5, 100], 32],\n    // Example 2 from book\n    [[2, 5, 30], 2],\n    // Edge cases\n    [[2, 0, 10], 1],\n    [[3, 1, 5], 3],\n    [[5, 3, 7], 6],\n  ];\n\n  for (const [[a, p, m], want] of tests) {\n    const got = power(a, p, m);\n    if (got !== want) {\n      throw new Error(\n        `\\npower(${a}, ${p}, ${m}): got: ${got}, want: ${want}\\n`,\n      );\n    }\n  }\n}\n\nrunTests();",
+    "java": "class RunTests {\n  public void runTests() {\n    Object[][] tests = {\n        // Example 1 from book\n        { new int[] { 2, 5, 100 }, 32 },\n        // Example 2 from book\n        { new int[] { 2, 5, 30 }, 2 },\n        // Edge cases\n        { new int[] { 2, 0, 10 }, 1 },\n        { new int[] { 3, 1, 5 }, 3 },\n        { new int[] { 5, 3, 7 }, 6 },\n        // Large test case\n        { new int[] { 123456789, 987654321, 1000000007 }, 652541198 },\n    };\n\n    Power solution = new Power();\n    for (Object[] test : tests) {\n      int[] params = (int[]) test[0];\n      int want = (Integer) test[1];\n      int got = solution.solve(params[0], params[1], params[2]);\n      if (got != want) {\n        throw new RuntimeException(String.format(\n            \"\\nsolve(%d, %d, %d): got: %d, want: %d\\n\",\n            params[0], params[1], params[2], got, want));\n      }\n    }\n  }\n}\n\npublic class Solution {\n  public static void main(String[] args) {\n    new RunTests().runTests();\n  }\n}"
+  }
+}

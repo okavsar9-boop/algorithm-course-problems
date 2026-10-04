@@ -1,0 +1,30 @@
+{
+  "num": "3.7",
+  "title": "2-Sum",
+  "slug": "2-sum",
+  "description": {
+    "intro": "Given a sorted array of integers, arr, return whether there are two distinct indices, i and j, such that arr[i] + arr[j] = 0.",
+    "examples": [
+      "Example 1:\nInput: arr = [-5, -2, -1, 1, 1, 10]\nOutput: true\nExplanation: The elements -1 and 1 sum to zero.",
+      "Example 2:\nInput: arr = [-3, 0, 0, 1, 2]\nOutput: true\nExplanation: The two 0s sum to zero.",
+      "Example 3:\nInput: arr = [-5, -3, -1, 0, 2, 4, 6]\nOutput: false\nExplanation: No two elements sum to zero."
+    ],
+    "constraints": [
+      "arr is sorted in ascending order",
+      "0 \u2264 arr.length \u2264 10^6",
+      "-10^9 \u2264 arr[i] \u2264 10^9"
+    ],
+    "approach": "We need to find two numbers that are the opposite of each other, like -5 and 5. We have all the negative numbers at the beginning and all the positive numbers at the end, which suggests trying inward pointers.\n\nWe can compare the first and the last numbers, which are the smallest (most negative) and the largest. If they add to more than 0, like if arr[l] is -5 and arr[r] is 10, the largest number (10) is too large: we will not find any numbers that sum to -10, so we can skip over 10.\n\nIn the opposite case, where the sum is negative, we can skip over the most negative number by increasing l.\n\nWe can stop as soon as we find a pair that sums to 0 or when the pointers meet.\n\n![alt text](image-5.png)\n\nTwo sum solution 1"
+  },
+  "complexity": "Time & Space Analysis\nn: the length of the array\n\nTime: O(n) - each element is visited by a pointer at most once as the pointers move inward\n\nExtra space: O(1) - only using constant extra space for the two pointers",
+  "solutions": {
+    "python": "def two_sum(arr):\n  l, r = 0, len(arr) - 1\n  while l < r:\n    if arr[l] + arr[r] > 0:\n      r -= 1\n    elif arr[l] + arr[r] < 0:\n      l += 1\n    else:\n      return True\n  return False",
+    "javascript": "function twoSum(arr) {\n  let l = 0,\n  r = arr.length - 1;\n  while (l < r) {\n    if (arr[l] + arr[r] > 0) {\n      r--;\n    } else if (arr[l] + arr[r] < 0) {\n      l++;\n    } else {\n      return true;\n    }\n  }\n  return false;\n}",
+    "java": "class TwoSum {\n  public boolean solve(int[] arr) {\n    int l = 0, r = arr.length - 1;\n    while (l < r) {\n      if (arr[l] + arr[r] > 0) {\n        r--;\n      } else if (arr[l] + arr[r] < 0) {\n        l++;\n      } else {\n        return true;\n      }\n    }\n    return false;\n  }\n}"
+  },
+  "tests": {
+    "python": "def run_tests():\n  tests = [ # Example 1 from the book\n    ([-5, -2, -1, 1, 1, 10], True), # Example 2 from the book\n    ([-3, 0, 0, 1, 2], True), # Example 3 from the book\n    ([-5, -3, -1, 0, 2, 4, 6], False), # Additional test cases\n    ([], False),\n    ([0], False),\n    ([-1, 1], True),\n    ([-2, -1, 0, 1], True),\n    ([1, 2, 3, 4], False),\n    ]\n  for arr, want in tests:\n    got = two_sum(arr)\n    assert got == want, f\"\\ntwo_sum({arr}): got: {got}, want: {want}\\n\"\n\nrun_tests()",
+    "javascript": "function runTests() {\n  const tests = [\n  // Example 1 from the book\n  [[-5, -2, -1, 1, 1, 10], true],\n  // Example 2 from the book\n  [[-3, 0, 0, 1, 2], true],\n  // Example 3 from the book\n  [[-5, -3, -1, 0, 2, 4, 6], false],\n  // Additional test cases\n  [[], false],\n  [[0], false],\n  [[-1, 1], true],\n  [[-2, -1, 0, 1], true],\n  [[1, 2, 3, 4], false],\n  ];\n  for (const [arr, want] of tests) {\n    const got = twoSum(arr);\n    if (got !== want) {\n      throw new Error(\n      `\\ntwoSum(${JSON.stringify(arr)}): got: ${got}, want: ${want}\\n`,\n      );\n    }\n  }\n}\n\nrunTests();",
+    "java": "class RunTests {\n  public void runTests() {\n    Object[][] tests = {\n      // Example 1 from the book\n      { new int[] { -5, -2, -1, 1, 1, 10 }, true },\n      // Example 2 from the book\n      { new int[] { -3, 0, 0, 1, 2 }, true },\n      // Example 3 from the book\n      { new int[] { -5, -3, -1, 0, 2, 4, 6 }, false },\n      // Additional test cases\n      { new int[] {}, false },\n      { new int[] { 0 }, false },\n      { new int[] { -1, 1 }, true },\n      { new int[] { -2, -1, 0, 1 }, true },\n      { new int[] { 1, 2, 3, 4 }, false },\n    };\n\n    TwoSum solution = new TwoSum();\n    for (Object[] test : tests) {\n      int[] arr = (int[]) test[0];\n      boolean want = (boolean) test[1];\n      boolean got = solution.solve(arr);\n      if (got != want) {\n        throw new RuntimeException(String.format(\n        \"\\nsolve(%s): got: %b, want: %b\\n\",\n        Arrays.toString(arr), got, want));\n      }\n    }\n\n  }\n}\n\npublic class Solution {\n  public static void main(String[] args) {\n    new RunTests().runTests();\n  }\n}"
+  }
+}

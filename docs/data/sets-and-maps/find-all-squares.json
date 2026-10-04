@@ -1,0 +1,29 @@
+{
+  "num": "6.6",
+  "title": "Find All Squares",
+  "slug": "find-all-squares",
+  "description": {
+    "intro": "Given an array of unique integers, arr, return a list with all pairs of indices, [i, j], such that arr[i]^2 == arr[j]. You can return the pairs in any order.",
+    "examples": [
+      "Example 1: arr = [4, 10, 3, 100, 5, 2, 10000]\nOutput: [[5, 0], [1, 3], [3, 6]]. The 3 pairs of values that satisfy the\nconstraint are (2, 4), (10, 100), and (100, 10000). We return [5, 0] because\narr[5] is 2 and arr[0] is 4, and similarly for the other two pairs. Other\norders like [[1, 3], [0, 5], [3, 6]] would also be valid.",
+      "Example 2: arr = [1]\nOutput: [[0, 0]]. Since 1 is its own square, a 1 forms a pair with itself."
+    ],
+    "constraints": [
+      "The length of arr is at most 10^6",
+      "1 \u2264 arr[i] \u2264 10^9",
+      "All elements in arr are unique"
+    ],
+    "approach": "If we just had to find the pairs of values, we could put all the numbers in a set, and, for each number arr[i], check if arr[i]\u00b2 is in the set. Since we also need the indices, we can use a map. The numbers are the keys--the thing we need to search for--and the indices are the values--the thing we need to return when we find a match.\n\nSince input numbers are unique, we don't need to worry about map keys clashing. (If numbers were not unique we could store a list of indices for each value instead.)"
+  },
+  "complexity": "Time & Space Analysis\nn: the length of the input array\n\nTime: O(n) - we make two passes through the array: one to build the map and one to find the squares. Each map operation (insert and lookup) takes constant time.\n\nExtra space: O(n) - we store all numbers and their indices in the map.",
+  "solutions": {
+    "python": "def find_squared(arr):\n  num_to_index = {}\n  for i, num in enumerate(arr):\n    num_to_index[num] = i\n\n  res = []\n  for i, num in enumerate(arr):\n    square = num ** 2\n    if square in num_to_index:\n      res.append([i, num_to_index[square]])\n  return res",
+    "javascript": "function findSquared(arr) {\n  const numToIndex = new Map();\n  for (let i = 0; i < arr.length; i++) {\n    numToIndex.set(arr[i], i);\n  }\n\n  const res = [];\n  for (let i = 0; i < arr.length; i++) {\n    const square = arr[i] ** 2;\n    if (numToIndex.has(square)) {\n      res.push([i, numToIndex.get(square)]);\n    }\n  }\n  return res;\n}",
+    "java": "class FindSquared {\n  public List<List<Integer>> solve(List<Integer> arr) {\n    Map<Integer, Integer> numToIndex = new HashMap<>();\n    for (int i = 0; i < arr.size(); i++) {\n      numToIndex.put(arr.get(i), i);\n    }\n\n    List<List<Integer>> res = new ArrayList<>();\n    for (int i = 0; i < arr.size(); i++) {\n      int square = arr.get(i) * arr.get(i);\n      if (numToIndex.containsKey(square)) {\n        res.add(Arrays.asList(i, numToIndex.get(square)));\n      }\n    }\n    return res;\n  }\n}"
+  },
+  "tests": {
+    "python": "def run_tests():\n  tests = [\n      # Example \n      ([4, 10, 3, 100, 5, 2, 10000], [[5, 0], [1, 3], [3, 6]]),\n      # Additional test cases\n      ([], []),\n      ([1], [[0, 0]]),\n      ([2, 4], [[0, 1]]),\n  ]\n  for arr, want in tests:\n    got = find_squared(arr)\n    # Sort both lists to compare them regardless of order\n    got.sort()\n    want.sort()\n    assert got == want, f\"\\nfind_squared({arr}): got: {got}, want: {want}\\n\"\n\nrun_tests()",
+    "javascript": "function runTests() {\n  const tests = [\n    // Example\n    [\n      [4, 10, 3, 100, 5, 2, 10000],\n      [\n        [5, 0],\n        [1, 3],\n        [3, 6],\n      ],\n    ],\n    // Additional test cases\n    [[], []],\n    [[1], [[0, 0]]],\n    [[2, 4], [[0, 1]]],\n  ];\n\n  for (const [arr, want] of tests) {\n    const got = findSquared(arr);\n    // Sort both lists to compare them regardless of order\n    got.sort((a, b) => a[0] - b[0] || a[1] - b[1]);\n    want.sort((a, b) => a[0] - b[0] || a[1] - b[1]);\n    if (JSON.stringify(got) !== JSON.stringify(want)) {\n      throw new Error(\n        `\\nfindSquared(${JSON.stringify(arr)}): got: ${JSON.stringify(got)}, want: ${JSON.stringify(want)}\\n`,\n      );\n    }\n  }\n}\n\nrunTests();",
+    "java": "class RunTests {\n  public void runTests() {\n    Object[][] tests = {\n        // Example\n        {\n            new Integer[] { 4, 10, 3, 100, 5, 2, 10000 },\n            new Integer[][] {\n                { 5, 0 },\n                { 1, 3 },\n                { 3, 6 }\n            }\n        },\n        // Additional test cases\n        {\n            new Integer[] {},\n            new Integer[][] {}\n        },\n        {\n            new Integer[] { 1 },\n            new Integer[][] { { 0, 0 } }\n        },\n        {\n            new Integer[] { 2, 4 },\n            new Integer[][] { { 0, 1 } }\n        }\n    };\n\n    FindSquared solution = new FindSquared();\n    for (Object[] test : tests) {\n      Integer[] arrArray = (Integer[]) test[0];\n      Integer[][] wantArray = (Integer[][]) test[1];\n\n      List<Integer> arr = Arrays.asList(arrArray);\n      List<List<Integer>> want = Arrays.stream(wantArray)\n          .map(Arrays::asList)\n          .collect(Collectors.toList());\n\n      List<List<Integer>> got = solution.solve(arr);\n      // Sort both lists for comparison\n      got.sort((a, b) -> {\n        int cmp = a.get(0).compareTo(b.get(0));\n        return cmp != 0 ? cmp : a.get(1).compareTo(b.get(1));\n      });\n      want.sort((a, b) -> {\n        int cmp = a.get(0).compareTo(b.get(0));\n        return cmp != 0 ? cmp : a.get(1).compareTo(b.get(1));\n      });\n      if (!got.equals(want)) {\n        throw new RuntimeException(String.format(\n            \"\\nsolve(%s): got: %s, want: %s\\n\",\n            arr, got, want));\n      }\n    }\n  }\n}\n\npublic class Solution {\n  public static void main(String[] args) {\n    new RunTests().runTests();\n  }\n}"
+  }
+}

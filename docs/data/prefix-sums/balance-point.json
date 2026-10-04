@@ -1,0 +1,25 @@
+{
+  "num": "19.4",
+  "title": "Balance Point",
+  "slug": "balance-point",
+  "description": {
+    "intro": "Given an array of integers, arr, return the first balanced index, if there is any, or -1 otherwise. An index is balanced if the sum of the elements to its left is the same as the sum of the elements to its right.\n\nExample:\narr = [3, 5, -2, 7, 2, 2, 2]\nOutput: 3\nIndex 3 is balanced because 3 + 5 + (-2) equals 2 + 2 + 2.",
+    "examples": [],
+    "constraints": [
+      "The length of arr is at most 10^5",
+      "Each element in arr is an integer at most 10^4"
+    ],
+    "approach": "Clearly, this problem is related to the prefix sums technique. You might reasonably consider building two separate arrays to store prefix and postfix sums. However, we don't need to. We just need to check if the sum to the left of each index is the same as the sum to the right, and we can update both of these while iterating through the original array -- no extra array needed!"
+  },
+  "complexity": "Time & Space Analysis\nn: the length of the arr array\n\nTime: O(n) - two linear passes through the array\n\nExtra space: O(1) - no prefix sums array needed",
+  "solutions": {
+    "python": "def balanced_index(arr):\n  prefix_sum = 0\n  postfix_sum = sum(arr) - arr[0]\n\n  for i in range(len(arr)):\n    if prefix_sum == postfix_sum:\n      return i\n    prefix_sum += arr[i]\n    if i + 1 < len(arr):\n      postfix_sum -= arr[i+1]\n  return -1",
+    "javascript": "function balancedIndex(arr) {\n  let prefixSum = 0;\n  let postfixSum = arr.reduce((a, b) => a + b, 0) - arr[0];\n\n  for (let i = 0; i < arr.length; i++) {\n    if (prefixSum === postfixSum) {\n      return i;\n    }\n    prefixSum += arr[i];\n    if (i + 1 < arr.length) {\n      postfixSum -= arr[i + 1];\n    }\n  }\n  return -1;\n}",
+    "java": "class BalancedIndex {\n  public int solve(int[] arr) {\n    int prefixSum = 0;\n    int postfixSum = 0;\n    for (int x : arr) {\n      postfixSum += x;\n    }\n    postfixSum -= arr[0];\n\n    for (int i = 0; i < arr.length; i++) {\n      if (prefixSum == postfixSum) {\n        return i;\n      }\n      prefixSum += arr[i];\n      if (i + 1 < arr.length) {\n        postfixSum -= arr[i + 1];\n      }\n    }\n    return -1;\n  }\n}"
+  },
+  "tests": {
+    "python": "def run_tests():\n  tests = [\n    # Example from the book\n    ([3, 5, -2, 7, 2, 2, 2], 3),\n    # Edge case: No balance point\n    ([1, 2, 3], -1),\n    # Edge case: Balance at start\n    ([0, 1, -1], 0),\n    # Edge case: Balance at end\n    ([1, -1, 0], 2),\n  ]\n\n  for arr, want in tests:\n    got = balanced_index(arr)\n    assert got == want, f\"\\nbalanced_index({arr}): got: {got}, want: {want}\\n\"\n\nrun_tests()",
+    "javascript": "function runTests() {\n  const tests = [\n    // Example from the book\n    [[3, 5, -2, 7, 2, 2, 2], 3],\n    // Edge case: No balance point\n    [[1, 2, 3], -1],\n    // Edge case: Balance at start\n    [[0, 1, -1], 0],\n    // Edge case: Balance at end\n    [[1, -1, 0], 2],\n  ];\n\n  for (const [arr, want] of tests) {\n    const got = balancedIndex(arr);\n    if (got !== want) {\n      throw new Error(\n        `\\nbalancedIndex(${JSON.stringify(arr)}): got: ${got}, want: ${want}\\n`,\n      );\n    }\n  }\n}\n\nrunTests();",
+    "java": "class RunTests {\n  public void runTests() {\n    Object[][] tests = {\n        // Example from the book\n        { new int[] { 3, 5, -2, 7, 2, 2, 2 }, 3 },\n        // Edge case: No balance point\n        { new int[] { 1, 2, 3 }, -1 },\n        // Edge case: Balance at start\n        { new int[] { 0, 1, -1 }, 0 },\n        // Edge case: Balance at end\n        { new int[] { 1, -1, 0 }, 2 },\n    };\n\n    BalancedIndex solution = new BalancedIndex();\n    for (Object[] test : tests) {\n      int[] arr = (int[]) test[0];\n      int want = (int) test[1];\n      int got = solution.solve(arr);\n      if (got != want) {\n        throw new RuntimeException(String.format(\n            \"\\nsolve(%s): got: %d, want: %d\\n\",\n            java.util.Arrays.toString(arr), got, want));\n      }\n    }\n  }\n}\n\npublic class Solution {\n  public static void main(String[] args) {\n    new RunTests().runTests();\n  }\n}"
+  }
+}

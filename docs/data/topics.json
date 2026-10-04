@@ -1,0 +1,1221 @@
+{
+  "topics": [
+    {
+      "slug": "dynamic-arrays",
+      "title": "Dynamic Arrays",
+      "problems": [
+        {
+          "num": "1.1",
+          "title": "Implement Dynamic Array",
+          "slug": "implement-dynamic-array"
+        },
+        {
+          "num": "1.2",
+          "title": "Extra Dynamic Array Operations",
+          "slug": "extra-dynamic-array-operations"
+        }
+      ]
+    },
+    {
+      "slug": "string-manipulation",
+      "title": "String Manipulation",
+      "problems": [
+        {
+          "num": "2.1",
+          "title": "String Manipulation",
+          "slug": "string-manipulation"
+        },
+        {
+          "num": "2.2",
+          "title": "String Join",
+          "slug": "string-join"
+        }
+      ]
+    },
+    {
+      "slug": "two-pointers",
+      "title": "Two Pointers",
+      "problems": [
+        {
+          "num": "3.1",
+          "title": "Palindrome Check",
+          "slug": "palindrome-check"
+        },
+        {
+          "num": "3.2",
+          "title": "Smaller Prefixes",
+          "slug": "smaller-prefixes"
+        },
+        {
+          "num": "3.3",
+          "title": "Array Intersection",
+          "slug": "array-intersection"
+        },
+        {
+          "num": "3.4",
+          "title": "Palindromic Sentence",
+          "slug": "palindromic-sentence"
+        },
+        {
+          "num": "3.5",
+          "title": "Reverse Case Match",
+          "slug": "reverse-case-match"
+        },
+        {
+          "num": "3.6",
+          "title": "Merge Two Sorted Arrays",
+          "slug": "merge-two-sorted-arrays"
+        },
+        {
+          "num": "3.7",
+          "title": "2-Sum",
+          "slug": "2-sum"
+        },
+        {
+          "num": "3.8",
+          "title": "Three-Way Merge Without Duplicates",
+          "slug": "three-way-merge-without-duplicates"
+        },
+        {
+          "num": "3.9",
+          "title": "Sort Valley-Shaped Array",
+          "slug": "sort-valley-shaped-array"
+        },
+        {
+          "num": "3.10",
+          "title": "Missing Numbers in Range",
+          "slug": "missing-numbers-in-range"
+        },
+        {
+          "num": "3.11",
+          "title": "Interval Intersection",
+          "slug": "interval-intersection"
+        },
+        {
+          "num": "3.12",
+          "title": "Array Reversal",
+          "slug": "array-reversal"
+        },
+        {
+          "num": "3.13",
+          "title": "Parity Sorting",
+          "slug": "parity-sorting"
+        },
+        {
+          "num": "3.14",
+          "title": "In-Place Duplicate Removal",
+          "slug": "in-place-duplicate-removal"
+        },
+        {
+          "num": "3.15",
+          "title": "Quicksort Partition",
+          "slug": "quicksort-partition"
+        },
+        {
+          "num": "3.16",
+          "title": "Dutch Flag Problem",
+          "slug": "dutch-flag-problem"
+        },
+        {
+          "num": "3.17",
+          "title": "Prefix-Suffix Swap",
+          "slug": "prefix-suffix-swap"
+        },
+        {
+          "num": "3.18",
+          "title": "Shift Word to Back",
+          "slug": "shift-word-to-back"
+        }
+      ]
+    },
+    {
+      "slug": "grids-and-matrices",
+      "title": "Grids and Matrices",
+      "problems": [
+        {
+          "num": "4.1",
+          "title": "Chess Moves",
+          "slug": "chess-moves"
+        },
+        {
+          "num": "4.2",
+          "title": "Queen's Reach",
+          "slug": "queen-s-reach"
+        },
+        {
+          "num": "4.3",
+          "title": "Spiral Order",
+          "slug": "spiral-order"
+        },
+        {
+          "num": "4.4",
+          "title": "Snowprints",
+          "slug": "snowprints"
+        },
+        {
+          "num": "4.5",
+          "title": "Valid Sudoku",
+          "slug": "valid-sudoku"
+        },
+        {
+          "num": "4.6",
+          "title": "Subgrid Maximums",
+          "slug": "subgrid-maximums"
+        },
+        {
+          "num": "4.7",
+          "title": "Subgrid Sums",
+          "slug": "subgrid-sums"
+        },
+        {
+          "num": "4.8",
+          "title": "Matrix Operations",
+          "slug": "matrix-operations"
+        }
+      ]
+    },
+    {
+      "slug": "binary-search",
+      "title": "Binary Search",
+      "problems": [
+        {
+          "num": "5.1",
+          "title": "Search In Sorted Array",
+          "slug": "search-in-sorted-array"
+        },
+        {
+          "num": "5.2",
+          "title": "CCTV Footage",
+          "slug": "cctv-footage"
+        },
+        {
+          "num": "5.3",
+          "title": "Valley Bottom",
+          "slug": "valley-bottom"
+        },
+        {
+          "num": "5.4",
+          "title": "2-Array 2-Sum",
+          "slug": "2-array-2-sum"
+        },
+        {
+          "num": "5.5",
+          "title": "Target Count Divisible By K",
+          "slug": "target-count-divisible-by-k"
+        },
+        {
+          "num": "5.6",
+          "title": "Race Overtaking",
+          "slug": "race-overtaking"
+        },
+        {
+          "num": "5.7",
+          "title": "Search In Sorted Grid",
+          "slug": "search-in-sorted-grid"
+        },
+        {
+          "num": "5.8",
+          "title": "Search In Huge Array",
+          "slug": "search-in-huge-array"
+        },
+        {
+          "num": "5.9",
+          "title": "Min-Subarray-Sum Split",
+          "slug": "min-subarray-sum-split"
+        },
+        {
+          "num": "5.10",
+          "title": "Water Refilling",
+          "slug": "water-refilling"
+        },
+        {
+          "num": "5.11",
+          "title": "Min Pages Per Day",
+          "slug": "min-pages-per-day"
+        },
+        {
+          "num": "5.12",
+          "title": "Tide Aerial View",
+          "slug": "tide-aerial-view"
+        }
+      ]
+    },
+    {
+      "slug": "sets-and-maps",
+      "title": "Sets and Maps",
+      "problems": [
+        {
+          "num": "6.1",
+          "title": "Account Sharing Detection",
+          "slug": "account-sharing-detection"
+        },
+        {
+          "num": "6.2",
+          "title": "Most Shared Account",
+          "slug": "most-shared-account"
+        },
+        {
+          "num": "6.3",
+          "title": "Most Frequent Octet",
+          "slug": "most-frequent-octet"
+        },
+        {
+          "num": "6.4",
+          "title": "Multi-Account Cheating",
+          "slug": "multi-account-cheating"
+        },
+        {
+          "num": "6.5",
+          "title": "Domain Resolver",
+          "slug": "domain-resolver"
+        },
+        {
+          "num": "6.6",
+          "title": "Find All Squares",
+          "slug": "find-all-squares"
+        },
+        {
+          "num": "6.7",
+          "title": "Word Expansion Class",
+          "slug": "word-expansion-class"
+        },
+        {
+          "num": "6.8",
+          "title": "Cheater Detection",
+          "slug": "cheater-detection"
+        },
+        {
+          "num": "6.9",
+          "title": "Product of Alphabetical Sums",
+          "slug": "product-of-alphabetical-sums"
+        },
+        {
+          "num": "6.10",
+          "title": "Action Log Anomalies",
+          "slug": "action-log-anomalies"
+        },
+        {
+          "num": "6.11",
+          "title": "Largest Set Intersection",
+          "slug": "largest-set-intersection"
+        }
+      ]
+    },
+    {
+      "slug": "sorting",
+      "title": "Sorting",
+      "problems": [
+        {
+          "num": "7.1",
+          "title": "Sorting by Frequency",
+          "slug": "sorting-by-frequency"
+        },
+        {
+          "num": "7.2",
+          "title": "Nested Circles",
+          "slug": "nested-circles"
+        },
+        {
+          "num": "7.3",
+          "title": "Delete Operations",
+          "slug": "delete-operations"
+        },
+        {
+          "num": "7.4",
+          "title": "Spreadsheet",
+          "slug": "spreadsheet"
+        },
+        {
+          "num": "7.5",
+          "title": "Sort By Publication Year",
+          "slug": "sort-by-publication-year"
+        },
+        {
+          "num": "7.6",
+          "title": "First K",
+          "slug": "first-k"
+        }
+      ]
+    },
+    {
+      "slug": "stacks-and-queues",
+      "title": "Stacks and Queues",
+      "problems": [
+        {
+          "num": "8.1",
+          "title": "Compress Array",
+          "slug": "compress-array"
+        },
+        {
+          "num": "8.2",
+          "title": "Compress Array By K",
+          "slug": "compress-array-by-k"
+        },
+        {
+          "num": "8.3",
+          "title": "Viewer Counter Class",
+          "slug": "viewer-counter-class"
+        },
+        {
+          "num": "8.4",
+          "title": "Current URL",
+          "slug": "current-url"
+        },
+        {
+          "num": "8.5",
+          "title": "Current URL with Forward",
+          "slug": "current-url-with-forward"
+        },
+        {
+          "num": "8.6",
+          "title": "Balanced Partition",
+          "slug": "balanced-partition"
+        },
+        {
+          "num": "8.7",
+          "title": "Custom Brackets",
+          "slug": "custom-brackets"
+        },
+        {
+          "num": "8.8",
+          "title": "Longest Balanced Subsequence",
+          "slug": "longest-balanced-subsequence"
+        }
+      ]
+    },
+    {
+      "slug": "recursion",
+      "title": "Recursion",
+      "problems": [
+        {
+          "num": "9.1",
+          "title": "Robot Instructions",
+          "slug": "robot-instructions"
+        },
+        {
+          "num": "9.2",
+          "title": "Nested Array Sum",
+          "slug": "nested-array-sum"
+        },
+        {
+          "num": "9.3",
+          "title": "Powers Mod M",
+          "slug": "powers-mod-m"
+        },
+        {
+          "num": "9.4",
+          "title": "Lego Castle",
+          "slug": "lego-castle"
+        },
+        {
+          "num": "9.5",
+          "title": "Laminal Arrays",
+          "slug": "laminal-arrays"
+        }
+      ]
+    },
+    {
+      "slug": "linked-lists",
+      "title": "Linked Lists",
+      "problems": [
+        {
+          "num": "10.1",
+          "title": "Singly Linked List Design",
+          "slug": "singly-linked-list-design"
+        },
+        {
+          "num": "10.2",
+          "title": "Doubly Linked List Design",
+          "slug": "doubly-linked-list-design"
+        },
+        {
+          "num": "10.3",
+          "title": "Linked-List-Based Stack",
+          "slug": "linked-list-based-stack"
+        },
+        {
+          "num": "10.4",
+          "title": "Linked-List-Based Queue",
+          "slug": "linked-list-based-queue"
+        },
+        {
+          "num": "10.5",
+          "title": "Linked-List Copy",
+          "slug": "linked-list-copy"
+        },
+        {
+          "num": "10.6",
+          "title": "Linked-List Reversal",
+          "slug": "linked-list-reversal"
+        },
+        {
+          "num": "10.7",
+          "title": "Sublist Reversal",
+          "slug": "sublist-reversal"
+        },
+        {
+          "num": "10.8",
+          "title": "Linked-List Cycle Detection",
+          "slug": "linked-list-cycle-detection"
+        },
+        {
+          "num": "10.9",
+          "title": "Doubly Linked List To Array",
+          "slug": "doubly-linked-list-to-array"
+        },
+        {
+          "num": "10.10",
+          "title": "Linked-List Midpoint",
+          "slug": "linked-list-midpoint"
+        },
+        {
+          "num": "10.11",
+          "title": "Remove Kth Node From the End",
+          "slug": "remove-kth-node-from-the-end"
+        },
+        {
+          "num": "10.12",
+          "title": "Linked-List Zip",
+          "slug": "linked-list-zip"
+        },
+        {
+          "num": "10.13",
+          "title": "Duplicate Removal in Sorted Linked List",
+          "slug": "duplicate-removal-in-sorted-linked-list"
+        },
+        {
+          "num": "10.14",
+          "title": "Linked List Block Reversal",
+          "slug": "linked-list-block-reversal"
+        }
+      ]
+    },
+    {
+      "slug": "trees",
+      "title": "Trees",
+      "problems": [
+        {
+          "num": "11.1",
+          "title": "Aligned Chain",
+          "slug": "aligned-chain"
+        },
+        {
+          "num": "11.2",
+          "title": "Hidden Message",
+          "slug": "hidden-message"
+        },
+        {
+          "num": "11.3",
+          "title": "Aligned Path",
+          "slug": "aligned-path"
+        },
+        {
+          "num": "11.4",
+          "title": "Tree Layout",
+          "slug": "tree-layout"
+        },
+        {
+          "num": "11.5",
+          "title": "Triangle Count",
+          "slug": "triangle-count"
+        },
+        {
+          "num": "11.6",
+          "title": "Invert a Binary Tree",
+          "slug": "invert-a-binary-tree"
+        },
+        {
+          "num": "11.7",
+          "title": "Evaluate Expression Tree",
+          "slug": "evaluate-expression-tree"
+        },
+        {
+          "num": "11.8",
+          "title": "Left View",
+          "slug": "left-view"
+        },
+        {
+          "num": "11.9",
+          "title": "Most Prolific Level",
+          "slug": "most-prolific-level"
+        },
+        {
+          "num": "11.10",
+          "title": "Zig-Zag Order",
+          "slug": "zig-zag-order"
+        },
+        {
+          "num": "11.11",
+          "title": "Most Protected Node",
+          "slug": "most-protected-node"
+        },
+        {
+          "num": "11.12",
+          "title": "BST Search",
+          "slug": "bst-search"
+        },
+        {
+          "num": "11.13",
+          "title": "BST Nearest Value",
+          "slug": "bst-nearest-value"
+        },
+        {
+          "num": "11.14",
+          "title": "BST Validation",
+          "slug": "bst-validation"
+        },
+        {
+          "num": "11.15",
+          "title": "BST Duplicate Detection",
+          "slug": "bst-duplicate-detection"
+        },
+        {
+          "num": "11.16",
+          "title": "BST Kth Element",
+          "slug": "bst-kth-element"
+        },
+        {
+          "num": "11.17",
+          "title": "BST Merge Into Array",
+          "slug": "bst-merge-into-array"
+        }
+      ]
+    },
+    {
+      "slug": "graphs",
+      "title": "Graphs",
+      "problems": [
+        {
+          "num": "12.1",
+          "title": "Adjacency List Validation",
+          "slug": "adjacency-list-validation"
+        },
+        {
+          "num": "12.2",
+          "title": "Graph Path",
+          "slug": "graph-path"
+        },
+        {
+          "num": "12.3",
+          "title": "Tree Check",
+          "slug": "tree-check"
+        },
+        {
+          "num": "12.4",
+          "title": "Spanning Tree",
+          "slug": "spanning-tree"
+        },
+        {
+          "num": "12.5",
+          "title": "Reachability Queries",
+          "slug": "reachability-queries"
+        },
+        {
+          "num": "12.6",
+          "title": "Strongly Connected Graph",
+          "slug": "strongly-connected-graph"
+        },
+        {
+          "num": "12.7",
+          "title": "Hilliest Connected Component",
+          "slug": "hilliest-connected-component"
+        },
+        {
+          "num": "12.8",
+          "title": "Highest Average Elevation Gain",
+          "slug": "highest-average-elevation-gain"
+        },
+        {
+          "num": "12.9",
+          "title": "First Time All Connected",
+          "slug": "first-time-all-connected"
+        },
+        {
+          "num": "12.10",
+          "title": "Shortest-Path Queries",
+          "slug": "shortest-path-queries"
+        },
+        {
+          "num": "12.11",
+          "title": "Graph Hangout",
+          "slug": "graph-hangout"
+        },
+        {
+          "num": "12.12",
+          "title": "Days Until All Infected",
+          "slug": "days-until-all-infected"
+        },
+        {
+          "num": "12.13",
+          "title": "Count Grid Islands",
+          "slug": "count-grid-islands"
+        },
+        {
+          "num": "12.14",
+          "title": "Multi-Exit Maze",
+          "slug": "multi-exit-maze"
+        },
+        {
+          "num": "12.15",
+          "title": "RGB Distances",
+          "slug": "rgb-distances"
+        },
+        {
+          "num": "12.16",
+          "title": "The Floor Is Lava",
+          "slug": "the-floor-is-lava"
+        },
+        {
+          "num": "12.17",
+          "title": "Word Ladder Game Variation",
+          "slug": "word-ladder-game-variation"
+        }
+      ]
+    },
+    {
+      "slug": "heaps",
+      "title": "Heaps",
+      "problems": [
+        {
+          "num": "13.1",
+          "title": "Implement a Heap",
+          "slug": "implement-a-heap"
+        },
+        {
+          "num": "13.2",
+          "title": "K Most Played",
+          "slug": "k-most-played"
+        },
+        {
+          "num": "13.3",
+          "title": "Top Songs Class",
+          "slug": "top-songs-class"
+        },
+        {
+          "num": "13.4",
+          "title": "Top Songs Class With Updates",
+          "slug": "top-songs-class-with-updates"
+        },
+        {
+          "num": "13.5",
+          "title": "Popular Songs Class",
+          "slug": "popular-songs-class"
+        },
+        {
+          "num": "13.6",
+          "title": "Most Listened Across Genres",
+          "slug": "most-listened-across-genres"
+        },
+        {
+          "num": "13.7",
+          "title": "Make Playlist",
+          "slug": "make-playlist"
+        },
+        {
+          "num": "13.8",
+          "title": "Sum of First K Prime Powers",
+          "slug": "sum-of-first-k-prime-powers"
+        }
+      ]
+    },
+    {
+      "slug": "sliding-windows",
+      "title": "Sliding Windows",
+      "problems": [
+        {
+          "num": "14.1",
+          "title": "Most Weekly Sales",
+          "slug": "most-weekly-sales"
+        },
+        {
+          "num": "14.2",
+          "title": "Most Sales in K Days",
+          "slug": "most-sales-in-k-days"
+        },
+        {
+          "num": "14.3",
+          "title": "Unique Best Seller Streak",
+          "slug": "unique-best-seller-streak"
+        },
+        {
+          "num": "14.4",
+          "title": "Enduring Best Seller Streak",
+          "slug": "enduring-best-seller-streak"
+        },
+        {
+          "num": "14.5",
+          "title": "Longest Good Day Streak",
+          "slug": "longest-good-day-streak"
+        },
+        {
+          "num": "14.6",
+          "title": "Max Subarray Sum",
+          "slug": "max-subarray-sum"
+        },
+        {
+          "num": "",
+          "title": "14.7 Longest Alternating Sequence",
+          "slug": "14-7-longest-alternating-sequence"
+        },
+        {
+          "num": "14.8",
+          "title": "Maximum With at Most 3 Bad Days",
+          "slug": "maximum-with-at-most-3-bad-days"
+        },
+        {
+          "num": "14.9",
+          "title": "Ad Campaign Boost",
+          "slug": "ad-campaign-boost"
+        },
+        {
+          "num": "14.10",
+          "title": "Ad Campaign With Small Boosts",
+          "slug": "ad-campaign-with-small-boosts"
+        },
+        {
+          "num": "14.11",
+          "title": "Boosting Days Multiple Times",
+          "slug": "boosting-days-multiple-times"
+        },
+        {
+          "num": "14.12",
+          "title": "Longest Period at Most k Distinct",
+          "slug": "longest-period-at-most-k-distinct"
+        },
+        {
+          "num": "14.13",
+          "title": "Longest Repeated Substring",
+          "slug": "longest-repeated-substring"
+        },
+        {
+          "num": "14.14",
+          "title": "Shortest Period With Over 20 Sales",
+          "slug": "shortest-period-with-over-20-sales"
+        },
+        {
+          "num": "14.15",
+          "title": "Shortest With All Letters",
+          "slug": "shortest-with-all-letters"
+        },
+        {
+          "num": "14.16",
+          "title": "Smallest Range With k Elements",
+          "slug": "smallest-range-with-k-elements"
+        },
+        {
+          "num": "14.17",
+          "title": "Strong Start and Ending",
+          "slug": "strong-start-and-ending"
+        },
+        {
+          "num": "14.18",
+          "title": "Count Subarrays With at Most k Bad Days",
+          "slug": "count-subarrays-with-at-most-k-bad-days"
+        },
+        {
+          "num": "14.19",
+          "title": "Count Subarrays With Exactly k Bad Days",
+          "slug": "count-subarrays-with-exactly-k-bad-days"
+        },
+        {
+          "num": "14.20",
+          "title": "Count Subarrays With at Least k Bad Days",
+          "slug": "count-subarrays-with-at-least-k-bad-days"
+        },
+        {
+          "num": "14.21",
+          "title": "Count Subarrays With Good Start and Ending",
+          "slug": "count-subarrays-with-good-start-and-ending"
+        },
+        {
+          "num": "14.22",
+          "title": "Count Subarrays With Drops",
+          "slug": "count-subarrays-with-drops"
+        },
+        {
+          "num": "14.23",
+          "title": "Count Subarrays With Bad Days in Range",
+          "slug": "count-subarrays-with-bad-days-in-range"
+        },
+        {
+          "num": "14.24",
+          "title": "Count Subarrays With All Remainders",
+          "slug": "count-subarrays-with-all-remainders"
+        },
+        {
+          "num": "14.25",
+          "title": "Count Good Subarrays With at Least k Sales",
+          "slug": "count-good-subarrays-with-at-least-k-sales"
+        }
+      ]
+    },
+    {
+      "slug": "backtracking",
+      "title": "Backtracking",
+      "problems": [
+        {
+          "num": "15.1",
+          "title": "Max-Sum Path",
+          "slug": "max-sum-path"
+        },
+        {
+          "num": "15.2",
+          "title": "Subset Enumeration",
+          "slug": "subset-enumeration"
+        },
+        {
+          "num": "15.3",
+          "title": "Permutation Enumeration",
+          "slug": "permutation-enumeration"
+        },
+        {
+          "num": "15.4",
+          "title": "To Be or Not to Be",
+          "slug": "to-be-or-not-to-be"
+        },
+        {
+          "num": "15.5",
+          "title": "Thesaurusly",
+          "slug": "thesaurusly"
+        },
+        {
+          "num": "15.6",
+          "title": "Jumping Numbers",
+          "slug": "jumping-numbers"
+        },
+        {
+          "num": "",
+          "title": "15.7 IKEA Shopping",
+          "slug": "15-7-ikea-shopping"
+        },
+        {
+          "num": "15.8",
+          "title": "White Hat Hacker",
+          "slug": "white-hat-hacker"
+        },
+        {
+          "num": "15.9",
+          "title": "Count Unique Submultisets with Sum Zero",
+          "slug": "count-unique-submultisets-with-sum-zero"
+        },
+        {
+          "num": "15.10",
+          "title": "4-Directional Max-Sum Path",
+          "slug": "4-directional-max-sum-path"
+        },
+        {
+          "num": "15.11",
+          "title": "Escape with All Clues",
+          "slug": "escape-with-all-clues"
+        }
+      ]
+    },
+    {
+      "slug": "dynamic-programming",
+      "title": "Dynamic Programming",
+      "problems": [
+        {
+          "num": "16.1",
+          "title": "Road Trip",
+          "slug": "road-trip"
+        },
+        {
+          "num": "16.2",
+          "title": "Minivan Road Trip",
+          "slug": "minivan-road-trip"
+        },
+        {
+          "num": "16.3",
+          "title": "Restaurant Ratings",
+          "slug": "restaurant-ratings"
+        },
+        {
+          "num": "16.4",
+          "title": "Count 0-Sum Paths",
+          "slug": "count-0-sum-paths"
+        },
+        {
+          "num": "16.5",
+          "title": "Magic Blackjack",
+          "slug": "magic-blackjack"
+        },
+        {
+          "num": "16.6",
+          "title": "Minimum Steps to One",
+          "slug": "minimum-steps-to-one"
+        },
+        {
+          "num": "16.7",
+          "title": "Longest Common Subsequence",
+          "slug": "longest-common-subsequence"
+        },
+        {
+          "num": "16.8",
+          "title": "Reconstruct Longest Common Subsequence",
+          "slug": "reconstruct-longest-common-subsequence"
+        }
+      ]
+    },
+    {
+      "slug": "greedy-algorithms",
+      "title": "Greedy Algorithms",
+      "problems": [
+        {
+          "num": "17.1",
+          "title": "Most Non-Overlapping Intervals",
+          "slug": "most-non-overlapping-intervals"
+        },
+        {
+          "num": "17.2",
+          "title": "Time Traveler",
+          "slug": "time-traveler"
+        },
+        {
+          "num": "17.3",
+          "title": "Center Assignment",
+          "slug": "center-assignment"
+        },
+        {
+          "num": "17.4",
+          "title": "Minimum Triplet Medians",
+          "slug": "minimum-triplet-medians"
+        },
+        {
+          "num": "17.5",
+          "title": "Fewest Script Runs",
+          "slug": "fewest-script-runs"
+        },
+        {
+          "num": "17.6",
+          "title": "Time Traveler Max Year",
+          "slug": "time-traveler-max-year"
+        }
+      ]
+    },
+    {
+      "slug": "topological-sort",
+      "title": "Topological Sort",
+      "problems": [
+        {
+          "num": "18.1",
+          "title": "DAG Distances",
+          "slug": "dag-distances"
+        },
+        {
+          "num": "18.2",
+          "title": "DAG Path Reconstruction",
+          "slug": "dag-path-reconstruction"
+        },
+        {
+          "num": "18.3",
+          "title": "DAG Longest Path",
+          "slug": "dag-longest-path"
+        },
+        {
+          "num": "18.4",
+          "title": "Counting Paths",
+          "slug": "counting-paths"
+        },
+        {
+          "num": "18.5",
+          "title": "Parallel Compilation",
+          "slug": "parallel-compilation"
+        },
+        {
+          "num": "18.6",
+          "title": "Longest Path of Increasing Degrees",
+          "slug": "longest-path-of-increasing-degrees"
+        },
+        {
+          "num": "18.7",
+          "title": "Supersequence",
+          "slug": "supersequence"
+        },
+        {
+          "num": "18.8",
+          "title": "Number of Palindromic Splits",
+          "slug": "number-of-palindromic-splits"
+        }
+      ]
+    },
+    {
+      "slug": "prefix-sums",
+      "title": "Prefix Sums",
+      "problems": [
+        {
+          "num": "19.1",
+          "title": "Channel Views",
+          "slug": "channel-views"
+        },
+        {
+          "num": "19.2",
+          "title": "YouTube Video Reception",
+          "slug": "youtube-video-reception"
+        },
+        {
+          "num": "19.3",
+          "title": "Exclusive Product",
+          "slug": "exclusive-product"
+        },
+        {
+          "num": "19.4",
+          "title": "Balance Point",
+          "slug": "balance-point"
+        },
+        {
+          "num": "19.5",
+          "title": "YouTube Video Unusual Days",
+          "slug": "youtube-video-unusual-days"
+        },
+        {
+          "num": "19.6",
+          "title": "Count Subarrays With Sum K",
+          "slug": "count-subarrays-with-sum-k"
+        },
+        {
+          "num": "19.7",
+          "title": "Longest Subarray With Sum K",
+          "slug": "longest-subarray-with-sum-k"
+        },
+        {
+          "num": "19.8",
+          "title": "Segmented Video Votes",
+          "slug": "segmented-video-votes"
+        },
+        {
+          "num": "19.9",
+          "title": "Most Booked Slot",
+          "slug": "most-booked-slot"
+        },
+        {
+          "num": "19.10",
+          "title": "All Overbooked Slots",
+          "slug": "all-overbooked-slots"
+        }
+      ]
+    },
+    {
+      "slug": "set-and-map-implementations",
+      "title": "Set and Map Implementations",
+      "problems": [
+        {
+          "num": "20.1",
+          "title": "Hash Set Class",
+          "slug": "hash-set-class"
+        },
+        {
+          "num": "20.2",
+          "title": "Hash Set Class Extensions",
+          "slug": "hash-set-class-extensions"
+        },
+        {
+          "num": "20.3",
+          "title": "Multiset",
+          "slug": "multiset"
+        },
+        {
+          "num": "20.4",
+          "title": "Hash Map Class",
+          "slug": "hash-map-class"
+        },
+        {
+          "num": "20.5",
+          "title": "Hash Map Class Extensions",
+          "slug": "hash-map-class-extensions"
+        },
+        {
+          "num": "20.6",
+          "title": "Multimap",
+          "slug": "multimap"
+        }
+      ]
+    },
+    {
+      "slug": "monotonic-stacks-and-queues",
+      "title": "Monotonic Stacks and Queues",
+      "problems": [
+        {
+          "num": "21.1",
+          "title": "Max Queue",
+          "slug": "max-queue"
+        },
+        {
+          "num": "21.2",
+          "title": "Sliding Window Maximum",
+          "slug": "sliding-window-maximum"
+        },
+        {
+          "num": "21.3",
+          "title": "Largest Temperature Change",
+          "slug": "largest-temperature-change"
+        },
+        {
+          "num": "21.4",
+          "title": "Longest Stable Period",
+          "slug": "longest-stable-period"
+        },
+        {
+          "num": "21.5",
+          "title": "Next Greater Element",
+          "slug": "next-greater-element"
+        },
+        {
+          "num": "21.6",
+          "title": "Largest Rectangle",
+          "slug": "largest-rectangle"
+        },
+        {
+          "num": "21.7",
+          "title": "King Kong Vs Godzilla",
+          "slug": "king-kong-vs-godzilla"
+        },
+        {
+          "num": "21.8",
+          "title": "King Kong vs Godzilla In The Fog",
+          "slug": "king-kong-vs-godzilla-in-the-fog"
+        }
+      ]
+    },
+    {
+      "slug": "union-find",
+      "title": "Union-Find",
+      "problems": [
+        {
+          "num": "22.1",
+          "title": "Minimum Spanning Tree",
+          "slug": "minimum-spanning-tree"
+        },
+        {
+          "num": "22.2",
+          "title": "Num Groups Operation",
+          "slug": "num-groups-operation"
+        },
+        {
+          "num": "22.3",
+          "title": "MST Reconstruction",
+          "slug": "mst-reconstruction"
+        },
+        {
+          "num": "22.4",
+          "title": "Edge In MST",
+          "slug": "edge-in-mst"
+        },
+        {
+          "num": "22.5",
+          "title": "Num Connected Components Over Time",
+          "slug": "num-connected-components-over-time"
+        },
+        {
+          "num": "22.6",
+          "title": "Largest Connected Component Over Time",
+          "slug": "largest-connected-component-over-time"
+        },
+        {
+          "num": "22.7",
+          "title": "Presidential Election",
+          "slug": "presidential-election"
+        }
+      ]
+    }
+  ]
+}

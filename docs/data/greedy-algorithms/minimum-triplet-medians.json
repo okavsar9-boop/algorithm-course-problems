@@ -1,0 +1,32 @@
+{
+  "num": "17.4",
+  "title": "Minimum Triplet Medians",
+  "slug": "minimum-triplet-medians",
+  "description": {
+    "intro": "You are given a non-empty list of distinct integers, arr, where the length of arr is guaranteed to be a multiple of three. Your task is to group the numbers into triplets such that the sum of the medians of each triplet (the middle value in sorted order) is minimized. Return the sum of the medians.",
+    "examples": [
+      "Example 1:\narr = [6, 5, 8, 2, 1, 9]",
+      "Output: 8\nOne optimal grouping is [1, 2, 8], [5, 6, 9]\nThe sum of the medians is 2 + 6 = 8\nAnother optimal grouping is [1, 2, 9], [5, 6, 8]",
+      "Example 2:\narr = [6, 5, 8, 2, 1, 9, 12, 15, 14]",
+      "Output: 17\nOne optimal grouping is [5, 6, 14], [1, 2, 12], [8, 9, 15]\nThe sum of the medians is 6 + 2 + 9 = 17"
+    ],
+    "constraints": [
+      "The length of arr is a multiple of three.",
+      "3 <= arr.length < 10^5",
+      "1 <= arr[i] <= 10^9",
+      "All elements in arr are distinct."
+    ],
+    "approach": "We don't need to consider all the ways to partition arr into triplets. We can greedily form triplets with the smallest possible middle value.\n\nConsider the smallest number. It cannot be the middle element of a triplet, but it has to go in some triplet.\nWe should put the second-smallest value in the same triplet as the smallest value. If we didn't it would end up as the smallest element of a different triplet, which would be suboptimal.\nThe third element doesn't affect the contribution of this group to the overall sum, so we may as well pick the largest number. It's a \"safe bet.\"\nWe can repeat this logic for the remaining elements."
+  },
+  "complexity": "Time & Space Analysis\nn: the number of elements in arr\n\nTime: O(n log n) - for sorting.\n\nExtra space: O(n) - for sorting.\n\nEven if we sort arr in place, most built-in sorting algorithms use O(n) extra space.",
+  "solutions": {
+    "python": "def minimize_middle_sum(arr):\n  arr.sort()\n  middle_sum = 0\n  for i in range(len(arr) // 3):\n    middle_sum += arr[i * 2 + 1]\n  return middle_sum",
+    "javascript": "function minimizeMiddleSum(arr) {\n  arr.sort((a, b) => a - b);\n  let middleSum = 0;\n  for (let i = 0; i < Math.floor(arr.length / 3); i++) {\n    middleSum += arr[i * 2 + 1];\n  }\n  return middleSum;\n}",
+    "java": "class MinimizeMiddleSum {\n  public int solve(int[] arr) {\n    Arrays.sort(arr);\n    int middleSum = 0;\n    for (int i = 0; i < arr.length / 3; i++) {\n      middleSum += arr[i * 2 + 1];\n    }\n    return middleSum;\n  }\n}"
+  },
+  "tests": {
+    "python": "def run_tests():\n  # Example test cases\n  tests = [\n      # Example 1\n      ([6, 5, 8, 2, 1, 9], 8),\n      # Example 2\n      ([6, 5, 8, 2, 1, 9, 12, 15, 14], 17),\n\n      # Additional test cases\n      # Edge case: Single triplet\n      ([1, 2, 3], 2),\n      # Test with 6 elements\n      ([10, 20, 60, 30, 40, 50], 60),\n      # Test with 9 elements\n      ([1, 3, 5, 7, 9, 11, 13, 15, 17], 21),\n      # Test with 12 elements\n      ([2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24], 40),\n      # Test with 15 elements\n      ([10, 11, 12, 13, 14, 15, 1, 2, 3, 4, 5, 6, 7, 8, 9], 30),\n      # Test with 18 elements\n      ([5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90], 210),\n  ]\n\n  for arr, want in tests:\n    got = minimize_middle_sum(arr)\n    assert got == want, f\"\\nminimize_middle_sum({arr}): got: {        got}, want: {want}\\n\"\n\nrun_tests()",
+    "javascript": "function runTests() {\n  const tests = [\n    // Example 1\n    [[6, 5, 8, 2, 1, 9], 8],\n    // Example 2\n    [[6, 5, 8, 2, 1, 9, 12, 15, 14], 17],\n\n    // Additional test cases\n    // Edge case: Single triplet\n    [[1, 2, 3], 2],\n    // Test with 6 elements\n    [[10, 20, 60, 30, 40, 50], 60],\n    // Test with 9 elements\n    [[1, 3, 5, 7, 9, 11, 13, 15, 17], 21],\n    // Test with 12 elements\n    [[2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24], 40],\n    // Test with 15 elements\n    [[10, 11, 12, 13, 14, 15, 1, 2, 3, 4, 5, 6, 7, 8, 9], 30],\n    // Test with 18 elements\n    [\n      [5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90],\n      210,\n    ],\n  ];\n\n  for (const [arr, want] of tests) {\n    const input = [...arr];\n    const got = minimizeMiddleSum(input);\n    if (got !== want) {\n      throw new Error(\n        `\\nminimizeMiddleSum(${JSON.stringify(arr)}): got: ${got}, want: ${want}\\n`,\n      );\n    }\n  }\n}\n\nrunTests();",
+    "java": "class RunTests {\n  public void runTests() {\n    Object[][] tests = {\n        // Example 1\n        { new int[] { 6, 5, 8, 2, 1, 9 }, 8 },\n        // Example 2\n        { new int[] { 6, 5, 8, 2, 1, 9, 12, 15, 14 }, 17 },\n\n        // Additional test cases\n        // Edge case: Single triplet\n        { new int[] { 1, 2, 3 }, 2 },\n        // Test with 6 elements\n        { new int[] { 10, 20, 60, 30, 40, 50 }, 60 },\n        // Test with 9 elements\n        { new int[] { 1, 3, 5, 7, 9, 11, 13, 15, 17 }, 21 },\n        // Test with 12 elements\n        { new int[] { 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24 }, 40 },\n        // Test with 15 elements\n        { new int[] { 10, 11, 12, 13, 14, 15, 1, 2, 3, 4, 5, 6, 7, 8, 9 }, 30 },\n        // Test with 18 elements\n        { new int[] { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75,\n            80,\n            85, 90 }, 210 },\n    };\n\n    MinimizeMiddleSum solution = new MinimizeMiddleSum();\n    for (Object[] test : tests) {\n      int[] arr = (int[]) test[0];\n      int want = (int) test[1];\n      int[] input = arr.clone();\n      int got = solution.solve(input);\n      if (got != want) {\n        throw new RuntimeException(String.format(\n            \"\\nsolve(%s): got: %d, want: %d\\n\",\n            Arrays.toString(arr), got, want));\n      }\n    }\n  }\n}\n\npublic class Solution {\n  public static void main(String[] args) {\n    new RunTests().runTests();\n  }\n}"
+  }
+}

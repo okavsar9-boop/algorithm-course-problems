@@ -1,0 +1,30 @@
+{
+  "num": "3.3",
+  "title": "Array Intersection",
+  "slug": "array-intersection",
+  "description": {
+    "intro": "Given two sorted arrays, arr1 and arr2, return their intersection.\n\nThe intersection is a new array that contains all elements that appear in both arrays, in sorted order, including duplicates.",
+    "examples": [
+      "Example 1:\nInput:\narr1 = [1, 2, 3]\narr2 = [1, 3, 5]\nOutput: [1, 3]\nExplanation: 1 and 3 appear in both arrays.",
+      "Example 2:\nInput:\narr1 = [1, 1, 1]\narr2 = [1, 1]\nOutput: [1, 1]\nExplanation: Two 1s appear in both arrays.",
+      "Example 3:\nInput:\narr1 = [1, 2, 2, 3]\narr2 = []\nOutput: []"
+    ],
+    "constraints": [
+      "The input arrays are sorted in ascending order",
+      "0 \u2264 arr1.length, arr2.length \u2264 10^6",
+      "-10^9 \u2264 arr1[i], arr2[i] \u2264 10^9"
+    ],
+    "approach": "We can use a pointer for each input array. If both point to the same value, we can add it to the output. The key detail to make sure we don't miss any elements is that both arrays are sorted, so elements to the right of the pointers will be the same or larger. This means we can skip over the smallest element among the two pointers, as that element won't appear again in the other array.\n\nThe algorithm uses two pointers:\n\np1: current position in arr1\np2: current position in arr2\nAt each step:\n\nIf the elements at both pointers are equal:\nAdd the element to the result\nMove both pointers forward\nIf the element in arr1 is smaller:\nMove p1 forward (since we won't find this element in arr2)\nIf the element in arr2 is smaller:\nMove p2 forward (since we won't find this element in arr1)\nWe stop when either array is exhausted.\n![alt text](image-2.png)\nArray intersection solution 1\nThe key for the analysis is that we only scan each array once. The result is automatically sorted, so we don't have a 'sorting' bottleneck. The final runtime is linear in the size of the input arrays."
+  },
+  "complexity": "Time & Space Analysis\nn1: the length of arr1\n\nn2: the length of arr2\n\nTime: O(n1 + n2) - each element in both arrays is visited at most once by the two pointers\n\nExtra space: O(min(n1, n2)) - for the output array",
+  "solutions": {
+    "python": "def common_elements(arr1, arr2):\n  p1, p2 = 0, 0\n  res = []\n  while p1 < len(arr1) and p2 < len(arr2):\n    if arr1[p1] == arr2[p2]:\n      res.append(arr1[p1])\n      p1 += 1\n      p2 += 1\n    elif arr1[p1] < arr2[p2]:\n      p1 += 1\n    else:\n      p2 += 1\n  return res",
+    "javascript": "function commonElements(arr1, arr2) {\n  let p1 = 0,\n  p2 = 0;\n  const res = [];\n  while (p1 < arr1.length && p2 < arr2.length) {\n    if (arr1[p1] === arr2[p2]) {\n      res.push(arr1[p1]);\n      p1++;\n      p2++;\n    } else if (arr1[p1] < arr2[p2]) {\n      p1++;\n    } else {\n      p2++;\n    }\n  }\n  return res;\n}",
+    "java": "class CommonElements {\n  public int[] solve(int[] arr1, int[] arr2) {\n    int p1 = 0, p2 = 0;\n    List<Integer> res = new ArrayList<>();\n    while (p1 < arr1.length && p2 < arr2.length) {\n      if (arr1[p1] == arr2[p2]) {\n        res.add(arr1[p1]);\n        p1++;\n        p2++;\n      } else if (arr1[p1] < arr2[p2]) {\n        p1++;\n      } else {\n        p2++;\n      }\n    }\n    return res.stream().mapToInt(i -> i).toArray();\n  }\n}"
+  },
+  "tests": {
+    "python": "def run_tests():\n  tests = [ # Example 1 from the book\n    ([1, 2, 3], [1, 3, 5], [1, 3]), # Example 2 from the book\n    ([1, 1, 1], [1, 1], [1, 1]), # Additional test cases\n    ([], [], []),\n    ([1], [], []),\n    ([], [1], []),\n    ([1], [1], [1]),\n    ([1, 2, 3], [4, 5, 6], []),\n    ([1, 2, 2, 3], [2, 2, 3], [2, 2, 3]),\n    ]\n  for arr1, arr2, want in tests:\n    got = common_elements(arr1, arr2)\n    assert got == want, f\"\\ncommon_elements({arr1}, {arr2}): got: {got}, want: {want}\\n\"\n\nrun_tests()",
+    "javascript": "function runTests() {\n  const tests = [\n  // Example 1 from the book\n  [\n  [1, 2, 3],\n  [1, 3, 5],\n  [1, 3],\n  ],\n  // Example 2 from the book\n  [\n  [1, 1, 1],\n  [1, 1],\n  [1, 1],\n  ],\n  // Additional test cases\n  [[], [], []],\n  [[1], [], []],\n  [[], [1], []],\n  [[1], [1], [1]],\n  [[1, 2, 3], [4, 5, 6], []],\n  [\n  [1, 2, 2, 3],\n  [2, 2, 3],\n  [2, 2, 3],\n  ],\n  ];\n  for (const [arr1, arr2, want] of tests) {\n    const got = commonElements(arr1, arr2);\n    if (JSON.stringify(got) !== JSON.stringify(want)) {\n      throw new Error(\n      `\\ncommonElements(${JSON.stringify(arr1)}, ${JSON.stringify(arr2)}): got: ${JSON.stringify(got)}, want: ${JSON.stringify(want)}\\n`,\n      );\n    }\n  }\n  return true;\n}\n\nrunTests();",
+    "java": "class RunTests {\n  public void runTests() {\n    Object[][] tests = {\n      // Example 1 from the book\n      { new int[] { 1, 2, 3 }, new int[] { 1, 3, 5 }, new int[] { 1, 3 } },\n      // Example 2 from the book\n      { new int[] { 1, 1, 1 }, new int[] { 1, 1 }, new int[] { 1, 1 } },\n      // Additional test cases\n      { new int[] {}, new int[] {}, new int[] {} },\n      { new int[] { 1 }, new int[] {}, new int[] {} },\n      { new int[] {}, new int[] { 1 }, new int[] {} },\n      { new int[] { 1 }, new int[] { 1 }, new int[] { 1 } },\n      { new int[] { 1, 2, 3 }, new int[] { 4, 5, 6 }, new int[] {} },\n      { new int[] { 1, 2, 2, 3 }, new int[] { 2, 2, 3 },\n        new int[] { 2, 2, 3 } },\n    };\n\n    CommonElements solution = new CommonElements();\n    for (Object[] test : tests) {\n      int[] arr1 = (int[]) test[0];\n      int[] arr2 = (int[]) test[1];\n      int[] want = (int[]) test[2];\n      int[] got = solution.solve(arr1, arr2);\n      if (!Arrays.equals(got, want)) {\n        throw new RuntimeException(String.format(\n        \"\\nsolve(%s, %s): got: %s, want: %s\\n\",\n        Arrays.toString(arr1), Arrays.toString(arr2),\n        Arrays.toString(got), Arrays.toString(want)));\n      }\n    }\n\n  }\n}\n\npublic class Solution {\n  public static void main(String[] args) {\n    new RunTests().runTests();\n  }\n}"
+  }
+}

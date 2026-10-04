@@ -1,0 +1,29 @@
+{
+  "num": "5.3",
+  "title": "Valley Bottom",
+  "slug": "valley-bottom",
+  "description": {
+    "intro": "A valley-shaped array is an array of integers such that:\n\nIt can be split into a non-empty prefix and a non-empty suffix,\nThe prefix is sorted in decreasing order,\nThe suffix is sorted in increasing order,\nAll the elements are unique.\nGiven a valley-shaped array, arr, return the smallest value.",
+    "examples": [
+      "Example 1: arr = [6, 5, 4, 7, 9]\nOutput: 4",
+      "Example 2: arr = [5, 6, 7]\nOutput: 5. The prefix sorted in decreasing order is just [5].",
+      "Example 3: arr = [7, 6, 5]\nOutput: 5. The suffix sorted in increasing order is just [5]."
+    ],
+    "constraints": [
+      "2 \u2264 arr.length \u2264 10^6",
+      "-10^9 \u2264 arr[i] \u2264 10^9"
+    ],
+    "approach": "This problem shows that binary search can be used even if the input array is not monotonically sorted.\n\nAs usual for binary search problems, we can use the 'transition point' recipe:\n\ntransition_point_recipe()\n  define is_before(val) to return whether val is 'before'\n  initialize l and r to the first and last values in the range\n  handle edge cases:\n    - the range is empty\n    - l is 'after'  (the whole range is 'after')\n    - r is 'before' (the whole range is 'before')\n\nwhile l and r are not next to each other (r - l > 1)\n    mid = (l + r) / 2\n    if is_before(mid)\n      l = mid\n    else\n      r = mid\n\nreturn l (the last 'before'), r (the first 'after'), or something else,\n         depending on the problem\nIntuitively, we want to define the 'before' region as the descending prefix and the 'after' region as the ascending suffix. The tricky part is that an array like [6, 5, 4, 7, 9] can be formed in two ways:\n\nWith a descending prefix [6, 5, 4] and an ascending suffix [7, 9].\nWith a descending prefix [6, 5] and an ascending suffix [4, 7, 9].\nWe need a clear rule for how to define is_before(). For instance, if we want the 4 to be in the 'before' region, we can say that a number is in the 'before' region if (a) it is the first element, or (b) it's smaller than the previous element.\n\nThis definition is workable, but according to it, an array like [7, 6, 5] only contains 'before' elements; we need to check for that case during preprocessing.\n\nWith this definition, elements in the 'after' region are always greater than the previous element, so the smallest value in the entire array will be the last one in the 'before' region."
+  },
+  "complexity": "Time & Space Analysis\nn: the length of the array\n\nTime: O(log n)\n\nExtra space: O(1)",
+  "solutions": {
+    "python": "def valley_bottom(arr):\n\n  def is_before(i):\n    return i == 0 or arr[i] < arr[i - 1]\n\n  l, r = 0, len(arr) - 1\n  if is_before(r):\n    return arr[r]\n\n  while r - l > 1:\n    mid = (l + r) // 2\n    if is_before(mid):\n      l = mid\n    else:\n      r = mid\n  return arr[l]",
+    "javascript": "function valleyBottom(arr) {\n\n  function isBefore(i) {\n    return i === 0 || arr[i] < arr[i - 1];\n  }\n\n  let l = 0,\n    r = arr.length - 1;\n  if (isBefore(r)) {\n    return arr[r];\n  }\n\n  while (r - l > 1) {\n    const mid = Math.floor((l + r) / 2);\n    if (isBefore(mid)) {\n      l = mid;\n    } else {\n      r = mid;\n    }\n  }\n  return arr[l];\n}",
+    "java": "class ValleyBottom {\n  public int solve(int[] arr) {\n    int l = 0, r = arr.length - 1;\n    if (isBefore(r, arr)) {\n      return arr[r];\n    }\n\n    while (r - l > 1) {\n      int mid = (l + r) / 2;\n      if (isBefore(mid, arr)) {\n        l = mid;\n      } else {\n        r = mid;\n      }\n    }\n    return arr[l];\n  }\n\n  private boolean isBefore(int i, int[] arr) {\n    return i == 0 || arr[i] < arr[i - 1];\n  }\n}"
+  },
+  "tests": {
+    "python": "def run_tests():\n  tests = [\n      # Example 1 from book\n      ([6, 5, 4, 7, 9], 4),\n      # Example 2 from book\n      ([5, 6, 7], 5),\n      # Example 3 from book\n      ([7, 6, 5], 5),\n      ([2, 1], 1),\n      ([3, 2, 4], 2)\n  ]\n\n  for arr, want in tests:\n    got = valley_bottom(arr)\n    assert got == want, f\"\\nvalley_bottom({arr}): got: {got}, want: {want}\\n\"\n\nrun_tests()",
+    "javascript": "function runTests() {\n  const tests = [\n    // Example 1 from book\n    [[6, 5, 4, 7, 9], 4],\n    // Example 2 from book\n    [[5, 6, 7], 5],\n    // Example 3 from book\n    [[7, 6, 5], 5],\n    // Edge case - 2 elements\n    [[2, 1], 1],\n    // Edge case - 3 elements\n    [[3, 2, 4], 2],\n  ];\n\n  for (const [arr, want] of tests) {\n    const got = valleyBottom(arr);\n    if (got !== want) {\n      throw new Error(\n        `\\nvalleyBottom(${JSON.stringify(arr)}): got: ${got}, want: ${want}\\n`,\n      );\n    }\n  }\n}\n\nrunTests();",
+    "java": "class RunTests {\n  public void runTests() {\n    Object[][] tests = {\n        // Example 1 from book\n        { new int[] { 6, 5, 4, 7, 9 }, 4 },\n        // Example 2 from book\n        { new int[] { 5, 6, 7 }, 5 },\n        // Example 3 from book\n        { new int[] { 7, 6, 5 }, 5 },\n        // Edge case - 2 elements\n        { new int[] { 2, 1 }, 1 },\n        // Edge case - 3 elements\n        { new int[] { 3, 2, 4 }, 2 }\n    };\n\n    ValleyBottom solution = new ValleyBottom();\n    for (Object[] test : tests) {\n      int[] arr = (int[]) test[0];\n      int want = (int) test[1];\n      int got = solution.solve(arr);\n      if (got != want) {\n        throw new RuntimeException(String.format(\n            \"\\nsolve(%s): got: %d, want: %d\\n\",\n            Arrays.toString(arr), got, want));\n      }\n    }\n  }\n}\n\npublic class Solution {\n  public static void main(String[] args) {\n    new RunTests().runTests();\n  }\n}"
+  }
+}

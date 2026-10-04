@@ -1,0 +1,29 @@
+{
+  "num": "3.2",
+  "title": "Smaller Prefixes",
+  "slug": "smaller-prefixes",
+  "description": {
+    "intro": "Given an array of integers, arr, where the length, n, is even, return whether the following condition holds for every k in the range 1 \u2264 k <= n/2: \"the sum of the first k elements is smaller than the sum of the first 2k elements.\" If this condition is false for any k in the range, return false.",
+    "examples": [
+      "Example 1: arr = [1, 2, 2, -1]\nOutput: True. The prefix [1] has a smaller sum than the prefix [1, 2], and the\nprefix [1, 2] has a smaller sum than the prefix [1, 2, 2, -1]. The other\nprefixes have length > n/2.",
+      "Example 2: arr = [1, 2, -2, 1, 3, 5]\nOutput: False. The prefix [1, 2] has a larger sum than the prefix [1, 2, -2,\n1]."
+    ],
+    "constraints": [
+      "len(arr) is even",
+      "0 \u2264 len(arr) \u2264 10^6",
+      "-10^9 \u2264 arr[i] \u2264 10^9"
+    ],
+    "approach": "The naive solution would be to iterate over all values of k from 1 to n/2, and for each value, compute and compare the sums of the two prefixes. This would take O(n^2) time. Instead, we can use a slow pointer, sp, and a fast pointer, fp, where fp moves twice as fast as sp.\n\n![alt text](image-1.png)\n\nSmaller prefixes solution 1\nThe runtime is linear in the size of the input array, since each pointer visits each element at most once."
+  },
+  "complexity": "Time & Space Analysis\nn: the length of the array\n\nTime: O(n) - both pointers traverse the array once, with the fast pointer moving twice as fast as the slow pointer. Each element is visited at most once by each pointer\n\nExtra space: O(1) - only using constant extra space for the two pointers and running sums",
+  "solutions": {
+    "python": "def smaller_prefixes(arr):\n  sp, fp = 0, 0\n  slow_sum, fast_sum = 0, 0\n  while fp < len(arr):\n    slow_sum += arr[sp]\n    fast_sum += arr[fp] + arr[fp + 1]\n    if slow_sum >= fast_sum:\n      return False\n    sp += 1\n    fp += 2\n  return True",
+    "javascript": "function smallerPrefixes(arr) {\n  let sp = 0,\n  fp = 0;\n  let slowSum = 0,\n  fastSum = 0;\n  while (fp < arr.length) {\n    slowSum += arr[sp];\n    fastSum += arr[fp] + arr[fp + 1];\n    if (slowSum >= fastSum) {\n      return false;\n    }\n    sp++;\n    fp += 2;\n  }\n  return true;\n}",
+    "java": "class SmallerPrefixes {\n  public boolean solve(int[] arr) {\n    int sp = 0, fp = 0;\n    int slowSum = 0, fastSum = 0;\n    while (fp < arr.length) {\n      slowSum += arr[sp];\n      fastSum += arr[fp] + arr[fp + 1];\n      if (slowSum >= fastSum) {\n        return false;\n      }\n      sp++;\n      fp += 2;\n    }\n    return true;\n  }\n}"
+  },
+  "tests": {
+    "python": "def run_tests():\n  tests = [ # Example 1 from the book\n    ([1, 2, 2, -1], True), # Example 2 from the book\n    ([1, 2, -2, 1, 3, 5], False), # Additional test cases\n    ([0, 3, 7, 12, 10, 5, 0, 1], True),\n    ([], True),\n    ([1, 2], True),\n    ([2, 1], True),\n    ([-2, 1, -4, 5, -3, 7], True),\n    ([-2, 1, -14, 8, -3, 2], False),\n    ]\n  for arr, want in tests:\n    got = smaller_prefixes(arr)\n    assert got == want, f\"\\nsmaller_prefixes({arr}): got: {got}, want: {want}\\n\"\n\nrun_tests()",
+    "javascript": "function runTests() {\n  const tests = [\n  // Example 1 from the book\n  [[1, 2, 2, -1], true],\n  // Example 2 from the book\n  [[1, 2, -2, 1, 3, 5], false],\n  // Additional test cases\n  [[0, 3, 7, 12, 10, 5, 0, 1], true],\n  [[], true],\n  [[1, 2], true],\n  [[2, 1], true],\n  [[-2, 1, -4, 5, -3, 7], true],\n  [[-2, 1, -14, 8, -3, 2], false],\n  ];\n  for (const [arr, want] of tests) {\n    const got = smallerPrefixes(arr);\n    if (got !== want) {\n      throw new Error(\n      `\\nsmallerPrefixes(${JSON.stringify(arr)}): got: ${got}, want: ${want}\\n`,\n      );\n    }\n  }\n}\n\nrunTests();",
+    "java": "class RunTests {\n  public void runTests() {\n    Object[][] tests = {\n      // Example 1 from the book\n      { new int[] { 1, 2, 2, -1 }, true },\n      // Example 2 from the book\n      { new int[] { 1, 2, -2, 1, 3, 5 }, false },\n      // Additional test cases\n      { new int[] { 0, 3, 7, 12, 10, 5, 0, 1 }, true },\n      { new int[] {}, true },\n      { new int[] { 1, 2 }, true },\n      { new int[] { 2, 1 }, true },\n      { new int[] { -2, 1, -4, 5, -3, 7 }, true },\n      { new int[] { -2, 1, -14, 8, -3, 2 }, false },\n    };\n\n    SmallerPrefixes solution = new SmallerPrefixes();\n    for (Object[] test : tests) {\n      int[] arr = (int[]) test[0];\n      boolean want = (boolean) test[1];\n      boolean got = solution.solve(arr);\n      if (got != want) {\n        throw new RuntimeException(String.format(\n        \"\\nsolve(%s): got: %b, want: %b\\n\",\n        Arrays.toString(arr), got, want));\n      }\n    }\n\n  }\n}\n\npublic class Solution {\n  public static void main(String[] args) {\n    new RunTests().runTests();\n  }\n}"
+  }
+}

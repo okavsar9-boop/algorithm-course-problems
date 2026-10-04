@@ -1,0 +1,30 @@
+{
+  "num": "19.7",
+  "title": "Longest Subarray With Sum K",
+  "slug": "longest-subarray-with-sum-k",
+  "description": {
+    "intro": "Given an array of integers, arr, and an integer k, return the length of the longest subarray in arr with sum k, or -1 if there is no such subarray.",
+    "examples": [
+      "Example 1:\narr = [1, 2, 3, 2, 1], k = 3",
+      "Output: 2\nThe longest subarrays with sum 3 are [1, 2] and [2, 1].",
+      "Example 2:\narr = [-1, -2, -3, 2, 1], k = -3",
+      "Output: 5\nThe longest subarray with sum -3 is [-1, -2, -3, 2, 1]."
+    ],
+    "constraints": [
+      "The length of arr is at most 10^5",
+      "Each element in arr is an integer between -10^4 and 10^4"
+    ],
+    "approach": "This problem seems hard until you reframe it in terms of the input array's prefix sums.\n\nSay that we precompute an array, prefix_sum, where prefix_sum[i] is the sum of the first i elements of arr.\n\nThe subarray from arr[l] to arr[r] has sum k if and only if prefix_sum[r] - prefix_sum[l - 1] == k.\n\nThus, instead of looking for the longest subarray of arr with sum k, we can look for two indices in prefix_sum with difference k, and which are as far apart as possible.\n\nWe can compute prefix_sum in a preprocessing step. Then, the problem becomes:\n\nGiven an array of n integers, prefix_sum, and an integer k, return the longest range [l, r], with 0 <= l <= r < n, such that prefix_sum[r] - prefix_sum[l] == k (or just prefix_sum[r] == k if l == 0).\n\nWe can iterate through prefix_sum array with a pointer, r, and for each element prefix_sum[r], look for the earliest previous index with value prefix_sum[r] - k. To find this index quickly, we can use a map mapping prefix sums to the earliest index at which they appear."
+  },
+  "complexity": "Time & Space Analysis\nn: length of arr\n\nTime: O(n)\n\nExtra space: O(n) - for the prefix sums and the map",
+  "solutions": {
+    "python": "def longest_subarray_with_sum_k(arr, k):\n  prefix_sum = [0] * len(arr)\n  prefix_sum[0] = arr[0]\n  for i in range(1, len(arr)):\n    prefix_sum[i] = prefix_sum[i - 1] + arr[i]\n\n  prefix_sum_to_index = {0: -1}  # For the empty prefix.\n  res = -1\n  for r, val in enumerate(prefix_sum):\n    if val - k in prefix_sum_to_index:\n      l = prefix_sum_to_index[val - k]\n      res = max(res, r - l)\n    if val not in prefix_sum_to_index:\n      prefix_sum_to_index[val] = r\n  return res",
+    "javascript": "function longestSubarrayWithSumK(arr, k) {\n  const prefixSum = new Array(arr.length).fill(0);\n  prefixSum[0] = arr[0];\n  for (let i = 1; i < arr.length; i++) {\n    prefixSum[i] = prefixSum[i - 1] + arr[i];\n  }\n\n  const prefixSumToIndex = new Map([[0, -1]]); // For the empty prefix.\n  let res = -1;\n  for (let r = 0; r < prefixSum.length; r++) {\n    const val = prefixSum[r];\n    if (prefixSumToIndex.has(val - k)) {\n      const l = prefixSumToIndex.get(val - k);\n      res = Math.max(res, r - l);\n    }\n    if (!prefixSumToIndex.has(val)) {\n      prefixSumToIndex.set(val, r);\n    }\n  }\n  return res;\n}",
+    "java": "class LongestSubarrayWithSumK {\n  public int solve(int[] arr, int k) {\n    int[] prefixSum = new int[arr.length];\n    prefixSum[0] = arr[0];\n    for (int i = 1; i < arr.length; i++) {\n      prefixSum[i] = prefixSum[i - 1] + arr[i];\n    }\n\n    Map<Integer, Integer> prefixSumToIndex = new HashMap<>();\n    prefixSumToIndex.put(0, -1); // For the empty prefix.\n    int res = -1;\n    for (int r = 0; r < prefixSum.length; r++) {\n      int val = prefixSum[r];\n      if (prefixSumToIndex.containsKey(val - k)) {\n        int l = prefixSumToIndex.get(val - k);\n        res = Math.max(res, r - l);\n      }\n      if (!prefixSumToIndex.containsKey(val)) {\n        prefixSumToIndex.put(val, r);\n      }\n    }\n    return res;\n  }\n}"
+  },
+  "tests": {
+    "python": "def run_tests():\n  tests = [\n      # Example from the book\n      ([1, 2, 3, 2, 1], 3, 2),\n      ([-1, -2, -3, 2, 1], -3, 5),\n      # Edge case: All zeros\n      ([0, 0, 0], 0, 3),\n      # Edge case: No subarray with sum k\n      ([1, 2, 3], 10, -1),\n  ]\n\n  for arr, k, want in tests:\n    got = longest_subarray_with_sum_k(arr, k)\n    assert got == want, f\"\\ncount_subarrays({arr}, {k}): got: {        got}, want: {want}\\n\"\n\nrun_tests()",
+    "javascript": "function runTests() {\n  const tests = [\n    // Example from the book\n    [[1, 2, 3, 2, 1], 3, 2],\n    [[-1, -2, -3, 2, 1], -3, 5],\n    // Edge case: All zeros\n    [[0, 0, 0], 0, 3],\n    // Edge case: No subarray with sum k\n    [[1, 2, 3], 10, -1],\n  ];\n\n  for (const [arr, k, want] of tests) {\n    const got = longestSubarrayWithSumK(arr, k);\n    if (got !== want) {\n      throw new Error(\n        `\\nlongestSubarrayWithSumK(${JSON.stringify(arr)}, ${k}): got: ${got}, want: ${want}\\n`,\n      );\n    }\n  }\n}\n\nrunTests();",
+    "java": "class RunTests {\n  public void runTests() {\n    Object[][] tests = {\n        // Example from the book\n        { new int[] { 1, 2, 3, 2, 1 }, 3, 2 },\n        { new int[] { -1, -2, -3, 2, 1 }, -3, 5 },\n        // Edge case: All zeros\n        { new int[] { 0, 0, 0 }, 0, 3 },\n        // Edge case: No subarray with sum k\n        { new int[] { 1, 2, 3 }, 10, -1 },\n    };\n\n    LongestSubarrayWithSumK solution = new LongestSubarrayWithSumK();\n    for (Object[] test : tests) {\n      int[] arr = (int[]) test[0];\n      int k = (int) test[1];\n      int want = (int) test[2];\n      int got = solution.solve(arr, k);\n      if (got != want) {\n        throw new RuntimeException(String.format(\n            \"\\nsolve(%s, %d): got: %d, want: %d\\n\",\n            java.util.Arrays.toString(arr), k, got, want));\n      }\n    }\n  }\n}\n\npublic class Solution {\n  public static void main(String[] args) {\n    new RunTests().runTests();\n  }\n}"
+  }
+}

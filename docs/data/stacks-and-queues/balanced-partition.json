@@ -1,0 +1,25 @@
+{
+  "num": "8.6",
+  "title": "Balanced Partition",
+  "slug": "balanced-partition",
+  "description": {
+    "intro": "Given a balanced parentheses string, s, a balanced partition is a partition of s into substrings, each of which is itself balanced. Return the maximum possible number of substrings in a balanced partition.\n\nExample: s = \"((()))(()())()(()(()))\"\nOutput: 4. The balanced partition with the most substrings is \"((()))\",\n\"(()())\", \"()\", \"(()(()))\".",
+    "examples": [],
+    "constraints": [
+      "The length of s is at most 10^5",
+      "s consists only of '(' and ')'"
+    ],
+    "approach": "For balanced parentheses problems, it's useful to think of the \"mountain range visualization\":\n![alt text](image-2.png)\nIf we think about this problem in terms of plot heights, we'll realize we should start a new substring every time the plot goes back to height 0:\n![alt text](image-3.png)"
+  },
+  "complexity": "Time & Space Analysis\nn: the length of the string\n\nTime: O(n) - each character is processed exactly once\n\nExtra space: O(1) - only using constant extra space for the balance counter and partition count",
+  "solutions": {
+    "python": "def max_balanced_partition(s):\n  height = 0\n  res = 0\n  for c in s:\n    if c == '(':\n      height += 1\n    else:\n      height -= 1\n      if height == 0:\n        res += 1\n  return res",
+    "javascript": "function maxBalancedPartition(s) {\n  let height = 0;\n  let res = 0;\n  for (const c of s) {\n    if (c === \"(\") {\n      height += 1;\n    } else {\n      height -= 1;\n      if (height === 0) {\n        res += 1;\n      }\n    }\n  }\n  return res;\n}",
+    "java": "class MaxBalancedPartition {\n  public int solve(String s) {\n    int height = 0;\n    int res = 0;\n    for (char c : s.toCharArray()) {\n      if (c == '(') {\n        height++;\n      } else {\n        height--;\n        if (height == 0) {\n          res++;\n        }\n      }\n    }\n    return res;\n  }\n}"
+  },
+  "tests": {
+    "python": "def run_tests():\n  tests = [\n      (\"((()))(()())()(()(()))\", 4),\n      (\"()()()\", 3),\n      (\"(((())))\", 1),\n      (\"\", 0),\n      (\"()\", 1),\n  ]\n  for s, want in tests:\n    got = max_balanced_partition(s)\n    assert got == want, f\"\\nmax_balanced_partition({s}): got: {        got}, want: {want}\\n\"\n\nrun_tests()",
+    "javascript": "function runTests() {\n  const tests = [\n    [\"((()))(()())()(()(()))\", 4],\n    [\"()()()\", 3],\n    [\"(((())))\", 1],\n    [\"\", 0],\n    [\"()\", 1],\n  ];\n  for (const [s, want] of tests) {\n    const got = maxBalancedPartition(s);\n    if (got !== want) {\n      throw new Error(\n        `\\nmaxBalancedPartition(${s}): got: ${got}, want: ${want}\\n`,\n      );\n    }\n  }\n}\n\nrunTests();",
+    "java": "class RunTests {\n  public void runTests() {\n    Object[][] tests = {\n        { \"((()))(()())()(()(()))\", 4 },\n        { \"()()()\", 3 },\n        { \"(((())))\", 1 },\n        { \"\", 0 },\n        { \"()\", 1 },\n    };\n    MaxBalancedPartition solution = new MaxBalancedPartition();\n    for (Object[] test : tests) {\n      String s = (String) test[0];\n      int want = (int) test[1];\n      int got = solution.solve(s);\n      if (got != want) {\n        throw new RuntimeException(String.format(\n            \"\\nsolve(%s): got: %d, want: %d\\n\",\n            s, got, want));\n      }\n    }\n  }\n}\n\npublic class Solution {\n  public static void main(String[] args) {\n    new RunTests().runTests();\n  }\n}"
+  }
+}

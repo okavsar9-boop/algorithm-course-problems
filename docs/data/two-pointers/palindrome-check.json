@@ -1,0 +1,29 @@
+{
+  "num": "3.1",
+  "title": "Palindrome Check",
+  "slug": "palindrome-check",
+  "description": {
+    "intro": "Given a string s, return whether s is a palindrome. A palindrome is a string that reads the same forward and backward.",
+    "examples": [
+      "Example 1: s = \"level\"\nOutput: true",
+      "Example 2: s = \"naan\"\nOutput: true",
+      "Example 3: s = \"hello\"\nOutput: false"
+    ],
+    "constraints": [
+      "The length of s is at most 10^6",
+      "s consists of lowercase English letters"
+    ],
+    "approach": "This is a classic example of using two inward pointers. We can check if a string is a palindrome by comparing characters from both ends and moving inward. If at any point the characters don't match, we know it's not a palindrome.\n\nWe maintain two pointers:\n\nl (left): starts at the beginning of the string\nr (right): starts at the end of the string\nAt each step, we:\n\nCompare the characters at positions l and r\nIf they don't match, return false as the string is not a palindrome\nIf they match, move the pointers inward (l increases, r decreases)\nContinue until the pointers meet in the middle\nIf we make it through all comparisons without finding any mismatches, the string is a palindrome.\n![alt text](image.png)\nPalindrome check 1\nThe runtime is linear in the size of the input string, since each element is visited by a pointer at most once."
+  },
+  "complexity": "Time & Space Analysis\nn: the length of the string\n\nTime: O(n) - each character is compared at most once as the pointers move from the ends toward the center\n\nExtra space: O(1) - only using constant extra space for the two pointers",
+  "solutions": {
+    "python": "def palindrome(s):\n  l, r = 0, len(s) - 1\n  while l < r:\n    if s[l] != s[r]:\n      return False\n    l += 1\n    r -= 1\n  return True",
+    "javascript": "function palindrome(s) {\n  let l = 0,\n  r = s.length - 1;\n  while (l < r) {\n    if (s[l] !== s[r]) {\n      return false;\n    }\n    l++;\n    r--;\n  }\n  return true;\n}",
+    "java": "class Palindrome {\n  public boolean solve(String s) {\n    int l = 0, r = s.length() - 1;\n    while (l < r) {\n      if (s.charAt(l) != s.charAt(r)) {\n        return false;\n      }\n      l++;\n      r--;\n    }\n    return true;\n  }\n}"
+  },
+  "tests": {
+    "python": "def run_tests():\n  tests = [\n    # Example from the book\n    (\"level\", True),\n    (\"naan\", True),\n    # Additional test cases\n    (\"\", True),\n    (\"a\", True),\n    (\"ab\", False),\n    (\"abc\", False),\n    (\"abba\", True),\n    (\"abcba\", True),\n    ]\n  for s, want in tests:\n    got = palindrome(s)\n    assert got == want, f\"\\npalindrome({s}): got: {got}, want: {want}\\n\"\n\nrun_tests()",
+    "javascript": "function runTests() {\n  const tests = [\n  // Example from the book\n  [\"level\", true],\n  [\"naan\", true],\n  // Additional test cases\n  [\"\", true],\n  [\"a\", true],\n  [\"ab\", false],\n  [\"abc\", false],\n  [\"abba\", true],\n  [\"abcba\", true],\n  ];\n  for (const [s, want] of tests) {\n    const got = palindrome(s);\n    if (got !== want) {\n      throw new Error(`\\npalindrome(${s}): got: ${got}, want: ${want}\\n`);\n    }\n  }\n}\n\nrunTests();",
+    "java": "class RunTests {\n  public void runTests() {\n    Object[][] tests = {\n      // Example from the book\n      { \"level\", true },\n      { \"naan\", true },\n      // Additional test cases\n      { \"\", true },\n      { \"a\", true },\n      { \"ab\", false },\n      { \"abc\", false },\n      { \"abba\", true },\n      { \"abcba\", true },\n    };\n\n    Palindrome solution = new Palindrome();\n    for (Object[] test : tests) {\n      String s = (String) test[0];\n      boolean want = (boolean) test[1];\n      boolean got = solution.solve(s);\n      if (got != want) {\n        throw new RuntimeException(String.format(\n        \"\\nsolve(%s): got: %b, want: %b\\n\",\n        s, got, want));\n      }\n    }\n\n  }\n}\n\npublic class Solution {\n  public static void main(String[] args) {\n    new RunTests().runTests();\n  }\n}"
+  }
+}

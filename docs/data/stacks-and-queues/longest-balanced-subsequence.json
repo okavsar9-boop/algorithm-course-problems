@@ -1,0 +1,34 @@
+{
+  "num": "8.8",
+  "title": "Longest Balanced Subsequence",
+  "slug": "longest-balanced-subsequence",
+  "description": {
+    "intro": "Given a string of parentheses, s, return the longest balanced subsequence.\n\nA subsequence of s (not a subarray) is a string obtained by removing some of the letters in s. In other words, you have to delete the smallest number of characters necessary to make s balanced and return the resulting string. There may be more than one valid answer.",
+    "examples": [
+      "Example 1: s = \"))(())(()\"\nOutput: \"(())()\". We removed the following characters:",
+      "\"))(())(()\".\n    ^^    ^\nWe could have also removed",
+      "\"))(())(()\".\n    ^^     ^",
+      "Example 2: s = \"(()()\"\nOutput: \"()()\". We removed the following character:",
+      "\"(()()\"\n    ^\nWe could have also removed",
+      "\"(()()\"\n       ^",
+      "So \"(())\" is also a valid output.",
+      "Example 3: s = \"())(()\"\nOutput: \"()()\". We removed the following characters:",
+      "\"())(()\"\n      ^^\nThere are several other ways to reach the same answer. For example, we could\nhave also removed",
+      "\"())(()\"\n     ^  ^",
+      "Example 4: s = \"(\"\nOutput: \"\""
+    ],
+    "constraints": [],
+    "approach": "0 <= s.length <= 10^5\ns consists only of '(' and ')'\nProblem 32.8 - Longest Balanced Subsequence: Solution\nJava\nFor balanced parentheses problems, it's useful to think of the \"mountain range visualization\":\n\n![alt text](image-4.png)\nThinking of the mountain range visualization, we can characterize invalid parentheses as follows:\n\nClosing parentheses that send the mountain outline 'underground.'\nOpening parentheses that are left unmatched at the end.\n![alt text](image-5.png)\n\nThese invalid parentheses must be removed, so what we are left with after removing them is the longest balanced subsequence.\n\nThe reason why there are multiple valid outputs is that if the mountain range does not end at ground level, then there may be multiple opening parentheses we can remove to make it end at ground level, and those may result in different balanced subsequences.\n\nFor instance, in the example s = \"(()()\", the mountain range ends one level above ground level, and we can remove any single opening parentheses without making the mountain range go underground. Depending on which one we remove, we may end up with \"(())\" or \"()()\". Our solution always matches closing parentheses to open parentheses in a last-in-first-out manner, so the one that ends up getting removed is the first one."
+  },
+  "complexity": "Time & Space Analysis\nn: the length of the string\n\nTime: O(n) - we identify all invalid parentheses in a single pass, and then we build the result string in a second pass.\n\nExtra space: O(n) - in the worst case, the stack stores all opening parentheses.",
+  "solutions": {
+    "python": "stack = []\n\ndef longest_balanced_subsequence(s):\n  invalid_indices = set()\n  stack = []\n  for i, c in enumerate(s):\n    if c == \"(\":\n      stack.append(i)\n    elif not stack:\n      invalid_indices.add(i)\n    else:\n      stack.pop()\n\n  while stack:\n    invalid_indices.add(stack.pop())\n\n  res = []\n  for i, c in enumerate(s):\n    if i not in invalid_indices:\n      res.append(c)\n  return ''.join(res)",
+    "javascript": "function longestBalancedSubsequence(s) {\n  const invalidIndices = new Set();\n  const stack = [];\n  for (let i = 0; i < s.length; i++) {\n    const c = s[i];\n    if (c === \"(\") {\n      stack.push(i);\n    } else if (!stack.length) {\n      invalidIndices.add(i);\n    } else {\n      stack.pop();\n    }\n  }\n\n  while (stack.length) {\n    invalidIndices.add(stack.pop());\n  }\n\n  const res = [];\n  for (let i = 0; i < s.length; i++) {\n    if (!invalidIndices.has(i)) {\n      res.push(s[i]);\n    }\n  }\n  return res.join(\"\");\n}",
+    "java": "class LongestBalancedSubsequence {\n  public String solve(String s) {\n    Set<Integer> invalidIndices = new HashSet<>();\n    Stack<Integer> stack = new Stack<>();\n    for (int i = 0; i < s.length(); i++) {\n      char c = s.charAt(i);\n      if (c == '(') {\n        stack.push(i);\n      } else if (stack.isEmpty()) {\n        invalidIndices.add(i);\n      } else {\n        stack.pop();\n      }\n    }\n\n    while (!stack.isEmpty()) {\n      invalidIndices.add(stack.pop());\n    }\n\n    StringBuilder res = new StringBuilder();\n    for (int i = 0; i < s.length(); i++) {\n      if (!invalidIndices.contains(i)) {\n        res.append(s.charAt(i));\n      }\n    }\n    return res.toString();\n  }\n}"
+  },
+  "tests": {
+    "python": "def run_tests():\n  tests = [\n      (\"))(())(()\", [\"(())()\"]),\n      (\"(()()\", [\"()()\", \"(())\"]),\n      (\"(()(()(\", [\"()()\", \"(())\"]),\n      (\"())(()\", [\"()()\"]),\n      (\"(\", [\"\"]),\n      (\"\", [\"\"]),\n  ]\n  for s, want in tests:\n    got = longest_balanced_subsequence(s)\n    assert got in want, f\"\\nlongest_balanced_subsequence({s}): got: {        got}, want: {want}\\n\"\n\nrun_tests()",
+    "javascript": "function runTests() {\n  const tests = [\n    [\"))(())(()\", [\"(())()\"]],\n    [\"(()()\", [\"()()\", \"(())\"]],\n    [\"(()(()(\", [\"()()\", \"(())\"]],\n    [\"())(()\", [\"()()\"]],\n    [\"(\", [\"\"]],\n    [\"\", [\"\"]],\n  ];\n  for (const [s, want] of tests) {\n    const got = longestBalancedSubsequence(s);\n    if (!want.includes(got)) {\n      throw new Error(\n        `\\nlongestBalancedSubsequence(${s}): got: ${got}, want: ${want}\\n`,\n      );\n    }\n  }\n}\n\nrunTests();",
+    "java": "class RunTests {\n  public void runTests() {\n    Object[][] tests = {\n        { \"))(())(()\", new String[] { \"(())()\" } },\n        { \"(()()\", new String[] { \"()()\", \"(())\" } },\n        { \"(()(()(\", new String[] { \"()()\", \"(())\" } },\n        { \"())(()\", new String[] { \"()()\" } },\n        { \"(\", new String[] { \"\" } },\n        { \"\", new String[] { \"\" } }\n    };\n    LongestBalancedSubsequence solution = new LongestBalancedSubsequence();\n    for (Object[] test : tests) {\n      String s = (String) test[0];\n      String[] want = (String[]) test[1];\n      String got = solution.solve(s);\n      boolean found = false;\n      for (String w : want) {\n        if (got.equals(w)) {\n          found = true;\n          break;\n        }\n      }\n      if (!found) {\n        throw new RuntimeException(String.format(\n            \"\\nsolve(%s): got: %s, want: %s\\n\",\n            s, got, String.join(\" or \", want)));\n      }\n    }\n  }\n}\n\npublic class Solution {\n  public static void main(String[] args) {\n    new RunTests().runTests();\n  }\n}"
+  }
+}

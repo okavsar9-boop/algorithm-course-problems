@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Algorithm Problems</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" />
+</head>
+<body>
+  <button id="menu-toggle" aria-label="Toggle topics menu">&#9776;</button>
+
+  <div class="layout">
+    <nav id="sidebar">
+      <div class="sidebar-header">
+        <h1>Algorithm Problems</h1>
+        <button id="sidebar-collapse" aria-label="Collapse sidebar">&#10094;</button>
+      </div>
+      <div id="topic-list">Loading topics&hellip;</div>
+    </nav>
+
+    <button id="sidebar-expand" aria-label="Expand sidebar" hidden>&#9776;</button>
+
+    <main id="content">
+      <div id="placeholder" class="placeholder">
+        <p>&larr; Pick a problem from the sidebar to get started.</p>
+      </div>
+      <article id="problem-view" hidden>
+        <h2 id="problem-title"></h2>
+        <div id="problem-description"></div>
+
+        <button id="solution-toggle" class="solution-toggle">
+          <span>Show Solution</span>
+          <span class="solution-toggle-arrow">&#9660;</span>
+        </button>
+
+        <div id="solution-panel" hidden>
+          <div class="lang-select-row">
+            <select id="lang-select" class="lang-select"></select>
+          </div>
+
+          <div id="complexity-box" class="complexity-box" hidden></div>
+
+          <div class="code-section">
+            <div class="code-header">
+              <span>Solution</span>
+              <button class="copy-btn" data-copy-target="code-content">Copy</button>
+            </div>
+            <pre id="code-block"><code id="code-content"></code></pre>
+          </div>
+
+          <div class="code-section" id="tests-section" hidden>
+            <div class="code-header">
+              <span>Test Cases</span>
+              <button class="copy-btn" data-copy-target="tests-content">Copy</button>
+            </div>
+            <pre id="tests-block"><code id="tests-content"></code></pre>
+          </div>
+        </div>
+      </article>
+    </main>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
